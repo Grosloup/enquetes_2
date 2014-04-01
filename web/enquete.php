@@ -241,10 +241,10 @@ include_once "../datas/pays.php";
                                 <label for="q_4_3_d"><input type="radio" name="form[q_4_3]" id="q_4_3_d" value="4"/> A l'hôtel Les Jardins de Beauval</label>
                             </div>
                             <div class="field">
-                                <label for="q_4_3_e"><input type="radio" name="form[q_4_3]" id="q_4_3_e" value="5"/> Dans un autre hôtel ou en chambre d'hôtes</label>
+                                <label for="q_4_3_h"><input type="radio" name="form[q_4_3]" id="q_4_3_h" value="8"/> A la résidence de vacances Les Hameaux de Beauval</label>
                             </div>
                             <div class="field">
-                                <label for="q_4_3_h"><input type="radio" name="form[q_4_3]" id="q_4_3_h" value="8"/> A la r&eacute;sidence de vacances Les Hameaux de Beauval</label>
+                                <label for="q_4_3_e"><input type="radio" name="form[q_4_3]" id="q_4_3_e" value="5"/> Dans un autre hôtel ou en chambre d'hôtes</label>
                             </div>
                             <div class="field">
                                 <label for="q_4_3_f"><input type="radio" name="form[q_4_3]" id="q_4_3_f" value="6"/> Dans un camping</label>
@@ -759,6 +759,7 @@ include_once "../datas/pays.php";
                         <div class="col col4">
                             <h4>Q12b. (si oui) Lequel ?</h4>
                             <div class="field"><label for="q_12_1_a"><input type="radio" name="form[q_12_1]" id="q_12_1_a" value="1"/> Self-service Le Tropical</label></div>
+                            <div class="field"><label for="q_12_1_j"><input type="radio" name="form[q_12_1]" id="q_12_1_j" value="10"/> Le Kilimandjaro</label></div>
                             <div class="field"><label for="q_12_1_b"><input type="radio" name="form[q_12_1]" id="q_12_1_b" value="2"/> Crêperie La Roseraie</label></div>
                             <div class="field"><label for="q_12_1_c"><input type="radio" name="form[q_12_1]" id="q_12_1_c" value="3"/> L'Eucalyptus</label></div>
                             <div class="field"><label for="q_12_1_d"><input type="radio" name="form[q_12_1]" id="q_12_1_d" value="4"/> Les Lamentins</label></div>
@@ -767,7 +768,6 @@ include_once "../datas/pays.php";
                             <div class="field"><label for="q_12_1_g"><input type="radio" name="form[q_12_1]" id="q_12_1_g" value="7"/> Les Orangs-outans</label></div>
                             <div class="field"><label for="q_12_1_h"><input type="radio" name="form[q_12_1]" id="q_12_1_h" value="8"/> La Pagode</label></div>
                             <div class="field"><label for="q_12_1_i"><input type="radio" name="form[q_12_1]" id="q_12_1_i" value="9"/> Un chalet</label></div>
-                            <div class="field"><label for="q_12_1_j"><input type="radio" name="form[q_12_1]" id="q_12_1_j" value="10"/> Le Kilimandjaro</label></div>
                         </div>
                         <div class="col col1"></div>
                     </div>

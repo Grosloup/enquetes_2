@@ -138,8 +138,6 @@ $stmt->execute();
 
 $visiteur_id = $pdo->lastInsertId();
 
-/*$form["connait_hotel_jardin"]
-$form["connait_hotel_hameaux"]*/
 $saveVisiteurConnaitHotel = "INSERT INTO visiteur_connait_hotel (visiteur_id, hotel_id) VALUES (:visiteur_id, :hotel_id)";
 if($form["connait_hotel_jardin"]){
     $stmt = $pdo->prepare($saveVisiteurConnaitHotel);
