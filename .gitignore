@@ -11,7 +11,7 @@ web/img/
 web/js/vendor/
 web/js/tests/
 libs/
-tests/
+
 logs/
 docs/
 backup/
