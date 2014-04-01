@@ -18,15 +18,10 @@ include_once "../datas/pays.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title></title>
-
-    <!-- <link rel="stylesheet" href="/web/css/master.css"/>
-    <link rel="stylesheet" href="/web/css/font-awesome.min.css"/> -->
+    <title>Saisie des enquêtes</title>
     <link rel="stylesheet" href="/css/master.css"/>
     <link rel="stylesheet" href="/css/font-awesome.min.css"/>
-
     <script src="js/vendor/modernizr.js"></script>
-
 </head>
 <body>
 <!-- if html.lt-ie9 -->
@@ -34,7 +29,6 @@ include_once "../datas/pays.php";
     <p>Vous utilisez une version d'internet explorer incompatible avec ce site. Mettez à jour internet explorer vers la version 11, ou utilisez des navigateurs tels que
         <a href="https://www.google.com/intl/fr/chrome/browser/">Google Chrome</a>, <a href="http://www.mozilla.org/en-US/firefox/all/">Firefox</a>,...</p>
 </div>
-
 <div id="sidebar" class="">
     <div id="sb-actions">
         <button class="toggler"><span></span></button>
@@ -68,9 +62,6 @@ include_once "../datas/pays.php";
 </div>
 <div id="main-enquete">
     <form action="/process.php" method="post" id="theForm">
-
-
-
     <!-- ####################################################################################################################################### -->
     <!-- ####################################################################################################################################### -->
     <!-- ###########################################               question Q1          ######################################################## -->
@@ -93,11 +84,9 @@ include_once "../datas/pays.php";
                             </div>
                         </div>
                         <div class="col col2"></div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     <!-- ####################################################################################################################################### -->
     <!-- ####################################################################################################################################### -->
@@ -173,7 +162,6 @@ include_once "../datas/pays.php";
             <div class="wrapper">
                 <div class="question">
                     <h1>Q4a. Quel est le contexte de votre visite  :</h1>
-
                     <div class="row">
                         <div class="col col1"></div>
                         <div class="col col4">
@@ -201,7 +189,6 @@ include_once "../datas/pays.php";
             <div class="wrapper">
                 <div class="question">
                     <h1>Q4b et Q4c. Combien de temps dure votre séjour (si vous n'habitez pas ici) ?</h1>
-
                     <div class="row">
                         <div class="col col1"></div>
                         <div class="col col4">
@@ -222,7 +209,6 @@ include_once "../datas/pays.php";
                             </div>
                         </div>
                         <div class="col col1"></div>
-
                     </div>
                     <div class="row">
                         <div class="col col1"></div>
@@ -318,16 +304,6 @@ include_once "../datas/pays.php";
                             </div>
                             <div class="field">
                                 <label for="q_6_1_b"><input type="radio" name="form[q_6_1]" id="q_6_1_b" value="5"/> plus</label>
-                            </div>
-                            <!-- <div class="field">
-                                <label for="q_6_1_b"><input type="radio" name="form[q_6_1]" id="q_6_1_b" value="2"/> 3 fois</label>
-                            </div>
-                            <div class="field">
-                                <label for="q_6_1_c"><input type="radio" name="form[q_6_1]" id="q_6_1_c" value="3"/> 4 fois</label>
-                            </div>
-                            <div class="field">
-                                <label for="q_6_1_d"><input type="radio" name="form[q_6_1]" id="q_6_1_d" value="4"/> 5 fois ou plus</label>
-                            </div> -->
                         </div>
                         <div class="col col1"></div>
                     </div>
@@ -347,9 +323,6 @@ include_once "../datas/pays.php";
                             <div class="field">
                                 <label for="q_6_2_d"><input type="radio" name="form[q_6_2]" id="q_6_2_d" value="4"/> Il y a entre 3 et 5 ans</label>
                             </div>
-                            <!-- <div class="field">
-                                <label for="q_6_2_e"><input type="radio" name="form[q_6_2]" id="q_6_2_e" value="5"/> Il y a plus de 5 ans</label>
-                            </div> -->
                             <div class="field">
                                 <label for="q_6_2_f"><input type="radio" name="form[q_6_2]" id="q_6_2_f" value="6"/> Je ne me souviens pas</label>
                             </div>
@@ -403,7 +376,6 @@ include_once "../datas/pays.php";
             <div class="wrapper">
                 <div class="question">
                     <h1>Q8a et Q8b. Saviez-vous avant de venir que le ZooParc de Beauval avait accueilli 2 pandas géants ?</h1>
-
                     <div class="row">
                         <div class="col col1"></div>
                         <div class="col col4">
@@ -582,15 +554,6 @@ include_once "../datas/pays.php";
                                     <div class="field"><label for="q_9_2_2_b"><input type="checkbox" name="form[q_9][q_9_2][where_2][province]" id="q_9_2_2_b"/> Province</label></div>
                                 </div>
                             </div>
-                            <!-- <div class="field">
-                                <label for="q_9_2_a"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_a" value="1"/> Publicité à la télévision</label>
-                            </div>
-                            <div class="field">
-                                <label for="q_9_2_b"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_b" value="2"/> Lancement météo à la télévision</label>
-                            </div>
-                            <div class="field">
-                                <label for="q_9_2_c"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_c" value="3"/> Jeu, publicité à la radio</label>
-                            </div> -->
                             <div class="field">
                                 <label for="q_9_2_d"><input type="checkbox" name="form[q_9][q_9_2][how][]" id="q_9_2_d" value="4"/> Publicité dans la presse écrite, un guide touristique</label>
                             </div>
@@ -856,19 +819,6 @@ include_once "../datas/pays.php";
                         </div>
                         <div class="col col1"></div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col col1"></div>
-                        <div class="col col4">
-                            <h4>Q14b. Et sur l'hôtel Les Jardins de Beauval ?</h4>
-                            <div class="field">
-                                <label for="q_14_1_a"><input type="radio" name="form[q_14_1]" id="q_14_1_a" value="1"/> Oui</label>
-                            </div>
-                            <div class="field">
-                                <label for="q_14_1_b"><input type="radio" name="form[q_14_1]" id="q_14_1_b" value="0"/> Non</label>
-                            </div>
-                        </div>
-                        <div class="col col1"></div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -940,7 +890,6 @@ include_once "../datas/pays.php";
     <div class="navBtn" id="navigator-next"><i class="fa fa-angle-down"></i></div>
     <div class="navBtn" id="navigator-last"><i class="fa fa-angle-double-down"></i></div>
 </div>
-<!--<script src="/web/js/apps/main.js"></script>-->
 <script src="/js/apps/main.js"></script>
 </body>
 </html>
