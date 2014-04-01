@@ -93,9 +93,11 @@ $form["satisfaction_zoo_id"] = isset($formArr["q_11"]) ? $formArr["q_11"] : null
 $form["manger_resto"] = isset($formArr["q_12"]) ? $formArr["q_12"] : null; // mangé sur place
 $form["resto_id"] = isset($formArr["q_12_1"]) ? $formArr["q_12_1"] : null; // quel resto
 $form["satisfaction_resto_id"] = isset($formArr["q_12_2"]) ? $formArr["q_12_2"] : null; // avis resto
+$form["connait_hotel_jardin"] = isset($formArr["q_16"]["q_16_1"]) ? 1 : null;
+$form["connait_hotel_hameaux"] = isset($formArr["q_16"]["q_16_2"]) ? 1 : null;
 $form["remarque"] = isset($formArr["q_13"]) ? $formArr["q_13"] : null; // remarque
 $form["veux_infos_zoo"] = isset($formArr["q_14"]) ? $formArr["q_14"] : null; // recevoir pub zoo
-$form["veux_infos_hotel"] = isset($formArr["q_14_1"]) ? $formArr["q_14_1"] : null; // recevoir pub hotel
+//$form["veux_infos_hotel"] = isset($formArr["q_14_1"]) ? $formArr["q_14_1"] : null; // recevoir pub hotel
 $form["genre"] = isset($formArr["q_15_1"]) ? $formArr["q_15_1"] : null; // genre
 $form["nom"] = isset($formArr["q_15_2"]) ? $formArr["q_15_2"] : null; // nom
 $form["prenom"] = isset($formArr["q_15_3"]) ? $formArr["q_15_3"] : null; // prenom
@@ -111,7 +113,7 @@ try {
 
 // enregistrement du visiteur
 
-$saveUserSql = "INSERT INTO visiteur (genre, nom, prenom, email, veux_infos_zoo, veux_infos_hotel, departement_num, departement, pays, deja_venu, derniere_visite_id, nombre_visite_id) VALUES (:genre, :nom, :prenom, :email, :veux_infos_zoo, :veux_infos_hotel, :departement_num, :departement, :pays, :deja_venu, :derniere_visite_id, :nombre_visite_id)";
+$saveUserSql = "INSERT INTO visiteur (genre, nom, prenom, email, veux_infos_zoo, veux_infos_hotel, departement_num, departement, pays, deja_venu, derniere_visite_id, nombre_visite_id, connait_hotel_jardin, connait_hotel_hameaux) VALUES (:genre, :nom, :prenom, :email, :veux_infos_zoo, :veux_infos_hotel, :departement_num, :departement, :pays, :deja_venu, :derniere_visite_id, :nombre_visite_id, :connait_hotel_jardin, :connait_hotel_hameaux)";
 
 $stmt = $pdo->prepare($saveUserSql);
 
@@ -120,17 +122,38 @@ $stmt->bindValue(":nom", $form["nom"]);
 $stmt->bindValue(":prenom", $form["prenom"]);
 $stmt->bindValue(":email", $form["email"]);
 $stmt->bindValue(":veux_infos_zoo", $form["veux_infos_zoo"]);
-$stmt->bindValue(":veux_infos_hotel", $form["veux_infos_hotel"]);
+//$stmt->bindValue(":veux_infos_hotel", $form["veux_infos_hotel"]);
+$stmt->bindValue(":veux_infos_hotel", null);
 $stmt->bindValue(":departement_num", $form["departement_num"]);
 $stmt->bindValue(":departement", $form["departement"]);
 $stmt->bindValue(":pays", $form["pays"]);
 $stmt->bindValue(":deja_venu", $form["deja_venu"]);
 $stmt->bindValue(":derniere_visite_id", $form["derniere_visite_id"]);
 $stmt->bindValue(":nombre_visite_id", $form["nombre_visite_id"]);
+$stmt->bindValue(":connait_hotel_jardin", $form["connait_hotel_jardin"]);
+$stmt->bindValue(":connait_hotel_hameaux", $form["connait_hotel_hameaux"]);
+
 
 $stmt->execute();
 
 $visiteur_id = $pdo->lastInsertId();
+
+/*$form["connait_hotel_jardin"]
+$form["connait_hotel_hameaux"]*/
+$saveVisiteurConnaitHotel = "INSERT INTO visiteur_connait_hotel (visiteur_id, hotel_id) VALUES (:visiteur_id, :hotel_id)";
+if($form["connait_hotel_jardin"]){
+    $stmt = $pdo->prepare($saveVisiteurConnaitHotel);
+    $stmt->bindValue(":visiteur_id", $visiteur_id);
+    $stmt->bindValue(":hotel_id", 1);
+    $stmt->execute();
+}
+if($form["connait_hotel_hameaux"]){
+    $stmt = $pdo->prepare($saveVisiteurConnaitHotel);
+    $stmt->bindValue(":visiteur_id", $visiteur_id);
+    $stmt->bindValue(":hotel_id", 2);
+    $stmt->execute();
+}
+
 
 $saveVisiteSql = "INSERT INTO visite (visiteur_id , jour_passe_id , context_visite_id , duree_sejour_id , residence_id , temps_trajet_id , infos_par_web_zoo , infos_par_tel_zoo , satisfaction_zoo_id , manger_resto , resto_id , satisfaction_resto_id , remarque, programmation_id , qd_prog , panda_savoir , panda_decide , jour , mois , annee ) VALUES (:visiteur_id , :jour_passe_id , :context_visite_id , :duree_sejour_id , :residence_id , :temps_trajet_id , :infos_par_web_zoo , :infos_par_tel_zoo , :satisfaction_zoo_id , :manger_resto , :resto_id , :satisfaction_resto_id , :remarque , :programmation_id , :qd_prog , :panda_savoir , :panda_decide , :jour , :mois , :annee)";
 

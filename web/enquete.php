@@ -57,10 +57,11 @@ include_once "../datas/pays.php";
             <li><a href="#question-11" class="goto-question">Q10. Avant de venir au ZooParc de Beauval:</a></li>
             <li><a href="#question-12" class="goto-question">Q11. Globalement, en ce qui concerne la visite du ZooParc de Beauval, diriez-vous que vous avez :</a></li>
             <li><a href="#question-13" class="goto-question">Q12a Q12b Q12c. Vous êtes-vous arrêté dans un point de restauration ?</a></li>
-            <li><a href="#question-14" class="goto-question">Q13. Remarques et suggestions</a></li>
-            <li><a href="#question-15" class="goto-question">Q14a et Q14b. Aimeriez-vous recevoire 2 ou 3 fois par an des informations sur le ZooParc de Beauval (nouveautés, offres promotionnelles...) ?</a></li>
-            <li><a href="#question-16" class="goto-question">Civilités</a></li>
-            <li><a href="#question-17" class="goto-question">Validation</a></li>
+            <li><a href="#question-14" class="goto-question">Q13. Savez-vous qu'il existe des hôtels à Beauval ?</a></li>
+            <li><a href="#question-15" class="goto-question">Q14. Remarques et suggestions</a></li>
+            <li><a href="#question-16" class="goto-question">Q15. Aimeriez-vous recevoire 2 ou 3 fois par an des informations sur le ZooParc de Beauval (nouveautés, offres promotionnelles...) ?</a></li>
+            <li><a href="#question-17" class="goto-question">Civilités</a></li>
+            <li><a href="#question-18" class="goto-question">Validation</a></li>
         </ul>
 
     </div>
@@ -766,6 +767,7 @@ include_once "../datas/pays.php";
                             <div class="field"><label for="q_12_1_g"><input type="radio" name="form[q_12_1]" id="q_12_1_g" value="7"/> Les Orangs-outans</label></div>
                             <div class="field"><label for="q_12_1_h"><input type="radio" name="form[q_12_1]" id="q_12_1_h" value="8"/> La Pagode</label></div>
                             <div class="field"><label for="q_12_1_i"><input type="radio" name="form[q_12_1]" id="q_12_1_i" value="9"/> Un chalet</label></div>
+                            <div class="field"><label for="q_12_1_j"><input type="radio" name="form[q_12_1]" id="q_12_1_j" value="10"/> Le Kilimandjaro</label></div>
                         </div>
                         <div class="col col1"></div>
                     </div>
@@ -788,7 +790,37 @@ include_once "../datas/pays.php";
     <!-- ###########################################               question Q13              ################################################### -->
     <!-- ####################################################################################################################################### -->
     <!-- ####################################################################################################################################### -->
-        <div class="section" id="question-14">
+    <div class="section" id="question-14">
+        <div class="wrapper">
+            <div class="question">
+                <h1>Q13. Savez-vous qu'il existe des hôtels à Beauval ?</h1>
+
+                <div class="row">
+                    <div class="col col1"></div>
+                    <div class="col col5">
+                        <div class="field">
+                            <label for="q_16_a"><input type="checkbox" name="form[q_16][q_16_1]" id="q_16_a"/> Les Jardins de Beauval</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col1"></div>
+                    <div class="col col5">
+                        <div class="field">
+                            <label for="q_16_b"><input type="checkbox" name="form[q_16][q_16_2]" id="q_16_b"/> Les Hameaux de Beauval</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ####################################################################################################################################### -->
+    <!-- ####################################################################################################################################### -->
+    <!-- ###########################################               question Q14              ################################################### -->
+    <!-- ####################################################################################################################################### -->
+    <!-- ####################################################################################################################################### -->
+        <div class="section" id="question-15">
             <div class="wrapper">
                 <div class="question">
                     <h1>Q13. Remarques et suggestions</h1>
@@ -805,13 +837,13 @@ include_once "../datas/pays.php";
         </div>
     <!-- ####################################################################################################################################### -->
     <!-- ####################################################################################################################################### -->
-    <!-- ###########################################               question Q14a Q14b          ################################################# -->
+    <!-- ###########################################               question Q15                ################################################# -->
     <!-- ####################################################################################################################################### -->
     <!-- ####################################################################################################################################### -->
-        <div class="section" id="question-15">
+        <div class="section" id="question-16">
             <div class="wrapper">
                 <div class="question">
-                    <h1>Q14a et Q14b. Aimeriez-vous recevoire 2 ou 3 fois par an des informations sur le ZooParc de Beauval (nouveautés, offres promotionnelles...) ?</h1>
+                    <h1>Q15. Aimeriez-vous recevoire 2 ou 3 fois par an des informations sur le ZooParc de Beauval ou ses hôtels (nouveautés, offres promotionnelles...) ?</h1>
                     <div class="row">
                         <div class="col col1"></div>
                         <div class="col col4">
@@ -824,7 +856,7 @@ include_once "../datas/pays.php";
                         </div>
                         <div class="col col1"></div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col col1"></div>
                         <div class="col col4">
                             <h4>Q14b. Et sur l'hôtel Les Jardins de Beauval ?</h4>
@@ -836,7 +868,7 @@ include_once "../datas/pays.php";
                             </div>
                         </div>
                         <div class="col col1"></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -845,7 +877,7 @@ include_once "../datas/pays.php";
     <!-- ###########################################                   civilite              ################################################### -->
     <!-- ####################################################################################################################################### -->
     <!-- ####################################################################################################################################### -->
-        <div class="section" id="question-16">
+        <div class="section" id="question-17">
             <div class="wrapper">
                 <div class="question">
                     <h1>Civilités</h1>
@@ -877,7 +909,7 @@ include_once "../datas/pays.php";
     <!-- ###########################################                 validation              ################################################### -->
     <!-- ####################################################################################################################################### -->
     <!-- ####################################################################################################################################### -->
-        <div class="section" id="question-17">
+        <div class="section" id="question-18">
             <div class="wrapper">
                 <div class="question">
                     <h1>Validation</h1>
