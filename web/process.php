@@ -9,7 +9,7 @@ ini_set("xdebug.var_display_max_children", -1);
 ini_set("xdebug.var_display_max_data", -1);
 ini_set("xdebug.var_display_max_depth", -1);
 
-if (empty($_POST) || empty($_POST["form"] || empty($_POST["form"]["q_1"]))) {
+if (empty($_POST) || empty($_POST["form"]) || empty($_POST["form"]["q_1"])) {
     die("Erreur...");
 }
 

@@ -67,7 +67,7 @@ include_once "../datas/pays.php";
     </div>
 </div>
 <div id="main-enquete">
-    <form action="/web/process.php" method="post" id="theForm">
+    <form action="/process.php" method="post" id="theForm">
 
 
 
@@ -452,7 +452,7 @@ include_once "../datas/pays.php";
             <div class="row">
                 <div class="col col6">
                     <div class="field">
-                        <label for="q_9_a"><input type="checkbox" name="form[q_9][q_9_0][way]" id="q_9_a" value="12"/> Réseaux sociaux (Facebook, Google+, Twitter, etc )</label>
+                        <label for="q_9_l"><input type="checkbox" name="form[q_9][q_9_0][way]" id="q_9_l" value="12"/> Réseaux sociaux (Facebook, Google+, Twitter, etc )</label>
                     </div>
                 </div>
             </div>
@@ -623,7 +623,7 @@ include_once "../datas/pays.php";
                                 <label for="q_9_4_e"><input type="checkbox" name="form[q_9][q_9_4][where][]" id="q_9_4_e" value="5"/> Sur le part-brise de votre voiture</label>
                             </div>
                             <div class="field">
-                                <label for="q_9_4_e"><input type="checkbox" name="form[q_9][q_9_4][where][]" id="q_9_4_e" value="6"/> Distribué dans la rue</label>
+                                <label for="q_9_4_f"><input type="checkbox" name="form[q_9][q_9_4][where][]" id="q_9_4_f" value="6"/> Distribué dans la rue</label>
                             </div>
                         </div>
                     </div>
