@@ -62,8 +62,15 @@ $form["province_4"] = isset($formArr["q_9"]["q_9_1"]["where_4"]["province"]) ? 1
 
 
 $form["connaissance_zoo_type_id"][] = isset($formArr["q_9"]["q_9_2"]["way"]) ? $formArr["q_9"]["q_9_2"]["way"] : 0; // pub media
-$form["pub_where"] = isset($formArr["q_9"]["q_9_2"]["where"]) ? $formArr["q_9"]["q_9_2"]["where"] : null; // array
+$form["pub_where"] = isset($formArr["q_9"]["q_9_2"]["how"]) ? $formArr["q_9"]["q_9_2"]["how"] : null; // array
 // pour chaque valeur de $form[pub_where] => une ligne dans pub_media_visiteur_date
+
+$form["pub_paris_1"] = isset($formArr["q_9"]["q_9_2"]["where_1"]["paris"]) ? 1 : null; // array
+$form["pub_province_1"] = isset($formArr["q_9"]["q_9_2"]["where_1"]["province"]) ? 1 : null; // array
+$form["pub_paris_2"] = isset($formArr["q_9"]["q_9_2"]["where_2"]["paris"]) ? 1 : null; // array
+$form["pub_province_2"] = isset($formArr["q_9"]["q_9_2"]["where_2"]["province"]) ? 1 : null; // array
+
+
 
 $form["connaissance_zoo_type_id"][] = isset($formArr["q_9"]["q_9_3"]["way"]) ? $formArr["q_9"]["q_9_3"]["way"] : 0; // article media
 $form["article_where"] = isset($formArr["q_9"]["q_9_3"]["where"]) ? $formArr["q_9"]["q_9_3"]["where"] : null; // array
@@ -194,12 +201,22 @@ if (count($form["connaissance_zoo_type_id"])) {
 
     if (count($form["pub_where"])) {
         foreach ($form["pub_where"] as $k => $v) {
-            $sql = "INSERT INTO pub_media_visiteur_date (visiteur_id, mois, annee, pub_media_id) VALUES (:visiteur_id, :mois, :annee, :pub_media_id)";
+            $sql = "INSERT INTO pub_media_visiteur_date (visiteur_id, mois, annee, pub_media_id, paris, province) VALUES (:visiteur_id, :mois, :annee, :pub_media_id, :paris, :province)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(":visiteur_id", $visiteur_id);
             $stmt->bindValue(":mois", $form["mois"]);
             $stmt->bindValue(":annee", $form["annee"]);
             $stmt->bindValue(":pub_media_id", $v);
+            $with_paris_province = [1,2];
+            if(in_array($v, $with_paris_province)){
+                $pa = "pub_paris_" . $v;
+                $pr = "pub_province_" . $v;
+                $stmt->bindValue(":paris", $form[$pa]);
+                $stmt->bindValue(":province", $form[$pr]);
+            } else {
+                $stmt->bindValue(":paris", null);
+                $stmt->bindValue(":province", null);
+            }
             $stmt->execute();
         }
     }

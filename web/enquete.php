@@ -243,6 +243,9 @@ include_once "../datas/pays.php";
                                 <label for="q_4_3_e"><input type="radio" name="form[q_4_3]" id="q_4_3_e" value="5"/> Dans un autre hôtel ou en chambre d'hôtes</label>
                             </div>
                             <div class="field">
+                                <label for="q_4_3_h"><input type="radio" name="form[q_4_3]" id="q_4_3_h" value="8"/> A la r&eacute;sidence de vacances Les Hameaux de Beauval</label>
+                            </div>
+                            <div class="field">
                                 <label for="q_4_3_f"><input type="radio" name="form[q_4_3]" id="q_4_3_f" value="6"/> Dans un camping</label>
                             </div>
                             <div class="field">
@@ -313,6 +316,9 @@ include_once "../datas/pays.php";
                                 <label for="q_6_1_a"><input type="radio" name="form[q_6_1]" id="q_6_1_a" value="1"/> 2 fois</label>
                             </div>
                             <div class="field">
+                                <label for="q_6_1_b"><input type="radio" name="form[q_6_1]" id="q_6_1_b" value="5"/> plus</label>
+                            </div>
+                            <!-- <div class="field">
                                 <label for="q_6_1_b"><input type="radio" name="form[q_6_1]" id="q_6_1_b" value="2"/> 3 fois</label>
                             </div>
                             <div class="field">
@@ -320,7 +326,7 @@ include_once "../datas/pays.php";
                             </div>
                             <div class="field">
                                 <label for="q_6_1_d"><input type="radio" name="form[q_6_1]" id="q_6_1_d" value="4"/> 5 fois ou plus</label>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col col1"></div>
                     </div>
@@ -340,9 +346,9 @@ include_once "../datas/pays.php";
                             <div class="field">
                                 <label for="q_6_2_d"><input type="radio" name="form[q_6_2]" id="q_6_2_d" value="4"/> Il y a entre 3 et 5 ans</label>
                             </div>
-                            <div class="field">
+                            <!-- <div class="field">
                                 <label for="q_6_2_e"><input type="radio" name="form[q_6_2]" id="q_6_2_e" value="5"/> Il y a plus de 5 ans</label>
-                            </div>
+                            </div> -->
                             <div class="field">
                                 <label for="q_6_2_f"><input type="radio" name="form[q_6_2]" id="q_6_2_f" value="6"/> Je ne me souviens pas</label>
                             </div>
@@ -445,6 +451,13 @@ include_once "../datas/pays.php";
             <div class="row">
                 <div class="col col6">
                     <div class="field">
+                        <label for="q_9_a"><input type="checkbox" name="form[q_9][q_9_0][way]" id="q_9_a" value="12"/> Réseaux sociaux (Facebook, Google+, Twitter, etc )</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col6">
+                    <div class="field">
                         <label for="q_9_b"><input type="checkbox" name="form[q_9][q_9_1][way]" id="q_9_b" value="2"/> Affichage publicitaire</label>
                     </div>
                     <div class="row">
@@ -518,31 +531,6 @@ include_once "../datas/pays.php";
             <div class="row">
                 <div class="col col6">
                     <div class="field">
-                        <label for="q_9_c"><input type="checkbox" name="form[q_9][q_9_2][way]" id="q_9_c" value="3"/> Publicité dans les médias</label>
-                    </div>
-                    <div class="row">
-                        <div class="col col1"></div>
-                        <div class="col col5">
-                            <h4>Quel type de média ?</h4>
-                            <div class="field">
-                                <label for="q_9_2_a"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_a" value="1"/> Publicité à la télévision</label>
-                            </div>
-                            <div class="field">
-                                <label for="q_9_2_b"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_b" value="2"/> Lancement météo à la télévision</label>
-                            </div>
-                            <div class="field">
-                                <label for="q_9_2_c"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_c" value="3"/> Jeu, publicité à la radio</label>
-                            </div>
-                            <div class="field">
-                                <label for="q_9_2_d"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_d" value="4"/> Publicité dans la presse écrite, un guide touristique</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col col6">
-                    <div class="field">
                         <label for="q_9_d"><input type="checkbox" name="form[q_9][q_9_3][way]" id="q_9_d" value="4"/> Articles/émissions dans les médias</label>
                     </div>
                     <div class="row">
@@ -557,6 +545,53 @@ include_once "../datas/pays.php";
                             </div>
                             <div class="field">
                                 <label for="q_9_3_c"><input type="checkbox" name="form[q_9][q_9_3][where][]" id="q_9_3_c" value="3"/> Article dans la presse écrite (journal, magazine...)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col6">
+                    <div class="field">
+                        <label for="q_9_c"><input type="checkbox" name="form[q_9][q_9_2][way]" id="q_9_c" value="3"/> Publicité dans les médias</label>
+                    </div>
+                    <div class="row">
+                        <div class="col col1"></div>
+                        <div class="col col5">
+                            <h4>Quel type de média ?</h4>
+                            <div class="field">
+                                <label for="q_9_2_a"><input type="checkbox" name="form[q_9][q_9_2][how][]" id="q_9_2_a" value="5"/> Publicité à la radio</label>
+                            </div>
+                            <div class="row">
+                                <div class="col col1"></div>
+                                <div class="col col5">
+                                    <h4>Où était-ce ?</h4>
+                                    <div class="field"><label for="q_9_2_1_a"><input type="checkbox" name="form[q_9][q_9_2][where_1][paris]" id="q_9_2_1_a"/> Paris/Banlieue</label></div>
+                                    <div class="field"><label for="q_9_2_1_b"><input type="checkbox" name="form[q_9][q_9_2][where_1][province]" id="q_9_2_1_b"/> Province</label></div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="q_9_2_c"><input type="checkbox" name="form[q_9][q_9_2][how][]" id="q_9_2_c" value="6"/> Jeu à la radio</label>
+                            </div>
+                            <div class="row">
+                                <div class="col col1"></div>
+                                <div class="col col5">
+                                    <h4>Où était-ce ?</h4>
+                                    <div class="field"><label for="q_9_2_2_a"><input type="checkbox" name="form[q_9][q_9_2][where_2][paris]" id="q_9_2_2_a"/> Paris/Banlieue</label></div>
+                                    <div class="field"><label for="q_9_2_2_b"><input type="checkbox" name="form[q_9][q_9_2][where_2][province]" id="q_9_2_2_b"/> Province</label></div>
+                                </div>
+                            </div>
+                            <!-- <div class="field">
+                                <label for="q_9_2_a"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_a" value="1"/> Publicité à la télévision</label>
+                            </div>
+                            <div class="field">
+                                <label for="q_9_2_b"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_b" value="2"/> Lancement météo à la télévision</label>
+                            </div>
+                            <div class="field">
+                                <label for="q_9_2_c"><input type="checkbox" name="form[q_9][q_9_2][where][]" id="q_9_2_c" value="3"/> Jeu, publicité à la radio</label>
+                            </div> -->
+                            <div class="field">
+                                <label for="q_9_2_d"><input type="checkbox" name="form[q_9][q_9_2][how][]" id="q_9_2_d" value="4"/> Publicité dans la presse écrite, un guide touristique</label>
                             </div>
                         </div>
                     </div>
@@ -585,6 +620,9 @@ include_once "../datas/pays.php";
                             </div>
                             <div class="field">
                                 <label for="q_9_4_e"><input type="checkbox" name="form[q_9][q_9_4][where][]" id="q_9_4_e" value="5"/> Sur le part-brise de votre voiture</label>
+                            </div>
+                            <div class="field">
+                                <label for="q_9_4_e"><input type="checkbox" name="form[q_9][q_9_4][where][]" id="q_9_4_e" value="6"/> Distribué dans la rue</label>
                             </div>
                         </div>
                     </div>
