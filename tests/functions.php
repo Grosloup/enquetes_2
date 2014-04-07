@@ -5,7 +5,30 @@
  * Date: 31/03/2014
  * Time: 08:43
  */
-include_once "../../datas/depts.php";
+$departements = [
+    "01"=>"Ain", "02"=>"Aisne", "03"=>"Allier", "04"=>"Alpes-de-Haute-Provence",
+    "05"=>"Hautes-Alpes", "06"=>"Alpes-Maritimes", "07"=>"Ardèche", "08"=>"Ardennes",
+    "09"=>"Ariège", "10"=>"Aube", "11"=>"Aude", "12"=>"Aveyron", "13"=>"Bouches-du-Rhône",
+    "14"=>"Calvados", "15"=>"Cantal", "16"=>"Charente", "17"=>"Charente-Maritime", "18"=>"Cher",
+    "19"=>"Corrèze", "2A" => "Corse-du-Sud", "2B" => "Haute-Corse", "21"=>"Côte-d'Or",
+    "22"=>"Côtes-d'Armor", "23"=>"Creuse", "24"=>"Dordogne", "25"=>"Doubs", "26"=>"Drôme",
+    "27"=>"Eure", "28"=>"Eure-et-Loir", "29"=>"Finistère", "30"=>"Gard", "31"=>"Haute-Garonne",
+    "32"=>"Gers", "33"=>"Gironde", "34"=>"Hérault", "35"=>"Ille-et-Vilaine", "36"=>"Indre",
+    "37"=>"Indre-et-Loire", "38"=>"Isère", "39"=>"Jura", "40"=>"Landes", "41"=>"Loir-et-Cher",
+    "42"=>"Loire", "43"=>"Haute-Loire", "44"=>"Loire-Atlantique", "45"=>"Loiret", "46"=>"Lot",
+    "47"=>"Lot-et-Garonne", "48"=>"Lozère", "49"=>"Maine-et-Loire", "50"=>"Manche", "51"=>"Marne",
+    "52"=>"Haute-Marne", "53"=>"Mayenne", "54"=>"Meurthe-et-Moselle", "55"=>"Meuse", "56"=>"Morbihan",
+    "57"=>"Moselle", "58"=>"Nièvre", "59"=>"Nord", "60"=>"Oise", "61"=>"Orne", "62"=>"Pas-de-Calais",
+    "63"=>"Puy-de-Dôme", "64"=>"Pyrénées-Atlantiques", "65"=>"Hautes-Pyrénées", "66"=>"Pyrénées-Orientales",
+    "67"=>"Bas-Rhin", "68"=>"Haut-Rhin", "69"=>"Rhône", "70"=>"Haute-Saône", "71"=>"Saône-et-Loire",
+    "72"=>"Sarthe", "73"=>"Savoie", "74"=>"Haute-Savoie", "75"=>"Paris", "76"=>"Seine-Maritime",
+    "77"=>"Seine-et-Marne", "78"=>"Yvelines", "79"=>"Deux-Sèvres", "80"=>"Somme", "81"=>"Tarn",
+    "82"=>"Tarn-et-Garonne", "83"=>"Var", "84"=>"Vaucluse", "85"=>"Vendée", "86"=>"Vienne",
+    "87"=>"Haute-Vienne", "88"=>"Vosges", "89"=>"Yonne", "90"=>"Territoire de Belfort",
+    "91"=>"Essonne", "92"=>"Hauts-de-Seine", "93"=>"Seine-Saint-Denis", "94"=>"Val-de-Marne", "95"=>"Val-d'Oise",
+    "96"=>"Guadeloupe","97"=>"Martinique","98"=>"Guyanne","99"=>"Réunion",
+    "100" => "Etranger",
+];
 include_once "../../datas/pays.php";
 
 try {
@@ -101,12 +124,12 @@ function newVisitor(){
     }
 
 
-    return $visiteur_id;
+    return [$visiteur_id, $departement, $departementNum];
 }
 
-function newVisite($visitorId){
+function newVisite($visitor){
     global $pdo;
-    $dateEnd = new DateTime("2013-11-30", new DateTimeZone("Europe/Paris"));
+    $dateEnd = new DateTime("2014-04-30", new DateTimeZone("Europe/Paris"));
     $timeStampEnd = $dateEnd->getTimestamp();
     $timeStampStart = $timeStampEnd - 15552000;
     $dateAleatoireSecond = $timeStampStart + rand(0, 15552000);
@@ -179,9 +202,9 @@ function newVisite($visitorId){
     } else {
         $panda_savoir  = 1;
     }
-    $saveVisiteSql = "INSERT INTO visite (visiteur_id , jour_passe_id , context_visite_id , duree_sejour_id , residence_id , temps_trajet_id , infos_par_web_zoo , infos_par_tel_zoo , satisfaction_zoo_id , manger_resto , resto_id , satisfaction_resto_id , remarque, programmation_id , qd_prog , panda_savoir , panda_decide , jour , mois , annee ) VALUES (:visiteur_id , :jour_passe_id , :context_visite_id , :duree_sejour_id , :residence_id , :temps_trajet_id , :infos_par_web_zoo , :infos_par_tel_zoo , :satisfaction_zoo_id , :manger_resto , :resto_id , :satisfaction_resto_id , :remarque , :programmation_id , :qd_prog , :panda_savoir , :panda_decide , :jour , :mois , :annee)";
+    $saveVisiteSql = "INSERT INTO visite (visiteur_id , jour_passe_id , context_visite_id , duree_sejour_id , residence_id , temps_trajet_id , infos_par_web_zoo , infos_par_tel_zoo , satisfaction_zoo_id , manger_resto , resto_id , satisfaction_resto_id , remarque, programmation_id , qd_prog , panda_savoir , panda_decide , jour , mois , annee, departement_num, departement ) VALUES (:visiteur_id , :jour_passe_id , :context_visite_id , :duree_sejour_id , :residence_id , :temps_trajet_id , :infos_par_web_zoo , :infos_par_tel_zoo , :satisfaction_zoo_id , :manger_resto , :resto_id , :satisfaction_resto_id , :remarque , :programmation_id , :qd_prog , :panda_savoir , :panda_decide , :jour , :mois , :annee, :departement_num, :departement)";
     $stmt = $pdo->prepare($saveVisiteSql);
-    $stmt->bindValue(":visiteur_id", $visitorId);
+    $stmt->bindValue(":visiteur_id", $visitor[0]);
     $stmt->bindValue(":jour_passe_id", $jour_passe_id);
     $stmt->bindValue(":context_visite_id", $context_visite_id);
     $stmt->bindValue(":duree_sejour_id", $duree_sejour_id);
@@ -201,6 +224,8 @@ function newVisite($visitorId){
     $stmt->bindValue(":jour", $day);
     $stmt->bindValue(":mois", $month);
     $stmt->bindValue(":annee",$year);
+    $stmt->bindValue(":departement_num", $visitor[2]);
+    $stmt->bindValue(":departement", $visitor[1]);
     $stmt->execute();
 
     $connaissance_zoo_type_id = [];
@@ -217,7 +242,7 @@ function newVisite($visitorId){
             if ($v != 0) {
                 $sql = "INSERT INTO media_connaissance_zoo (visiteur_id, mois, annee, connaissance_zoo_type_id) VALUES (:visiteur_id, :mois, :annee, :connaissance_zoo_type_id)";
                 $stmt = $pdo->prepare($sql);
-                $stmt->bindValue(":visiteur_id", $visitorId);
+                $stmt->bindValue(":visiteur_id", $visitor[0]);
                 $stmt->bindValue(":mois", $month);
                 $stmt->bindValue(":annee",$year);
                 $stmt->bindValue(":connaissance_zoo_type_id", $v);
@@ -236,7 +261,7 @@ function newVisite($visitorId){
                     if ($v != 0) {
                         $sql = "INSERT INTO affichage_type_visiteur_date (visiteur_id, mois, annee, affichage_type_id, paris, province) VALUES (:visiteur_id, :mois, :annee, :affichage_type_id, :paris, :province)";
                         $stmt = $pdo->prepare($sql);
-                        $stmt->bindValue(":visiteur_id", $visitorId);
+                        $stmt->bindValue(":visiteur_id", $visitor[0]);
                         $stmt->bindValue(":mois", $month);
                         $stmt->bindValue(":annee",$year);
                         $stmt->bindValue(":affichage_type_id", $v);
@@ -270,7 +295,7 @@ function newVisite($visitorId){
                 foreach ($pub_where as $k => $v) {
                     $sql = "INSERT INTO pub_media_visiteur_date (visiteur_id, mois, annee, pub_media_id, paris, province) VALUES (:visiteur_id, :mois, :annee, :pub_media_id, :paris, :province)";
                     $stmt = $pdo->prepare($sql);
-                    $stmt->bindValue(":visiteur_id", $visitorId);
+                    $stmt->bindValue(":visiteur_id", $visitor[0]);
                     $stmt->bindValue(":mois", $month);
                     $stmt->bindValue(":annee",$year);;
                     $stmt->bindValue(":pub_media_id", $v);
@@ -303,7 +328,7 @@ function newVisite($visitorId){
                 foreach ($article_where as $k => $v) {
                     $sql = "INSERT INTO article_media_visiteur_date (visiteur_id, mois, annee, article_media_id) VALUES (:visiteur_id, :mois, :annee, :article_media_id)";
                     $stmt = $pdo->prepare($sql);
-                    $stmt->bindValue(":visiteur_id", $visitorId);
+                    $stmt->bindValue(":visiteur_id", $visitor[0]);
                     $stmt->bindValue(":mois", $month);
                     $stmt->bindValue(":annee",$year);
                     $stmt->bindValue(":article_media_id", $v);
@@ -324,7 +349,7 @@ function newVisite($visitorId){
                 foreach ($prospectus_where as $k => $v) {
                     $sql = "INSERT INTO prospectus_visiteur_date (visiteur_id, mois, annee, prospectus_id) VALUES (:visiteur_id, :mois, :annee, :prospectus_id)";
                     $stmt = $pdo->prepare($sql);
-                    $stmt->bindValue(":visiteur_id", $visitorId);
+                    $stmt->bindValue(":visiteur_id", $visitor[0]);
                     $stmt->bindValue(":mois", $month);
                     $stmt->bindValue(":annee",$year);
                     $stmt->bindValue(":prospectus_id", $v);

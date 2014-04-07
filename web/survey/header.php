@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Nicolas
- * Date: 01/04/2014
- * Time: 23:19
+ * User: grosloup
+ * Date: 04/04/2014
+ * Time: 09:54
  */
 
 ?>
@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/css/survey.css"/>
     <link rel="stylesheet" href="/css/font-awesome.min.css"/>
     <script src="/js/vendor/modernizr.js"></script>
+    <script src="/js/vendor/Chart.min.js"></script>
 </head>
 <body>
 <!-- if html.lt-ie9 -->
@@ -32,15 +33,3 @@
 <div id="topbar">
 
 </div>
-<div id="sidebar">
-
-</div>
-
-<div id="main">
-
-</div>
-
-
-<script src="/js/apps/survey/main.js"></script>
-</body>
-</html>

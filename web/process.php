@@ -153,7 +153,7 @@ if($form["connait_hotel_hameaux"]){
 }
 
 
-$saveVisiteSql = "INSERT INTO visite (visiteur_id , jour_passe_id , context_visite_id , duree_sejour_id , residence_id , temps_trajet_id , infos_par_web_zoo , infos_par_tel_zoo , satisfaction_zoo_id , manger_resto , resto_id , satisfaction_resto_id , remarque, programmation_id , qd_prog , panda_savoir , panda_decide , jour , mois , annee ) VALUES (:visiteur_id , :jour_passe_id , :context_visite_id , :duree_sejour_id , :residence_id , :temps_trajet_id , :infos_par_web_zoo , :infos_par_tel_zoo , :satisfaction_zoo_id , :manger_resto , :resto_id , :satisfaction_resto_id , :remarque , :programmation_id , :qd_prog , :panda_savoir , :panda_decide , :jour , :mois , :annee)";
+$saveVisiteSql = "INSERT INTO visite (visiteur_id , jour_passe_id , context_visite_id , duree_sejour_id , residence_id , temps_trajet_id , infos_par_web_zoo , infos_par_tel_zoo , satisfaction_zoo_id , manger_resto , resto_id , satisfaction_resto_id , remarque, programmation_id , qd_prog , panda_savoir , panda_decide , jour , mois , annee, departement_num, departement ) VALUES (:visiteur_id , :jour_passe_id , :context_visite_id , :duree_sejour_id , :residence_id , :temps_trajet_id , :infos_par_web_zoo , :infos_par_tel_zoo , :satisfaction_zoo_id , :manger_resto , :resto_id , :satisfaction_resto_id , :remarque , :programmation_id , :qd_prog , :panda_savoir , :panda_decide , :jour , :mois , :annee, :departement_num, :departement)";
 
 $stmt = $pdo->prepare($saveVisiteSql);
 
@@ -177,6 +177,8 @@ $stmt->bindValue(":panda_decide", $form["panda_decide"]);
 $stmt->bindValue(":jour", $form["jour"]);
 $stmt->bindValue(":mois", $form["mois"]);
 $stmt->bindValue(":annee", $form["annee"]);
+$stmt->bindValue(":departement", $form["departement"]);
+$stmt->bindValue(":departement_num", $form["departement_num"]);
 
 $stmt->execute();
 
