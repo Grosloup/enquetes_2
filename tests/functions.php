@@ -85,7 +85,18 @@ function newVisitor(){
         $derniereVisisteId = null;
         $nbreVisite = null;
     }
-    $saveUserSql = "INSERT INTO visiteur (genre, nom, prenom, email, veux_infos_zoo, veux_infos_hotel, departement_num, departement, pays, deja_venu, derniere_visite_id, nombre_visite_id, connait_hotel_jardin, connait_hotel_hameaux) VALUES (:genre, :nom, :prenom, :email, :veux_infos_zoo, :veux_infos_hotel, :departement_num, :departement, :pays, :deja_venu, :derniere_visite_id, :nombre_visite_id, :connait_hotel_jardin, :connait_hotel_hameaux)";
+
+    $dateEnd = new DateTime("2014-04-30", new DateTimeZone("Europe/Paris"));
+    $timeStampEnd = $dateEnd->getTimestamp();
+    $timeStampStart = $timeStampEnd - 15552000;
+    $dateAleatoireSecond = $timeStampStart + rand(0, 15552000);
+    $dateAleatoire = new DateTime();
+    $dateAleatoire->setTimestamp($dateAleatoireSecond);
+    $month = $dateAleatoire->format("m");
+    $year = 13;
+    $day = $dateAleatoire->format("d");
+    $date = [$day,$month,$year,$dateAleatoireSecond];
+    $saveUserSql = "INSERT INTO visiteur (genre, nom, prenom, email, veux_infos_zoo, veux_infos_hotel, departement_num, departement, pays, deja_venu, derniere_visite_id, nombre_visite_id, connait_hotel_jardin, connait_hotel_hameaux, vtimestamp ) VALUES (:genre, :nom, :prenom, :email, :veux_infos_zoo, :veux_infos_hotel, :departement_num, :departement, :pays, :deja_venu, :derniere_visite_id, :nombre_visite_id, :connait_hotel_jardin, :connait_hotel_hameaux, :vtimestamp)";
 
     $stmt = $pdo->prepare($saveUserSql);
 
@@ -103,7 +114,7 @@ function newVisitor(){
     $stmt->bindValue(":nombre_visite_id", $nbreVisite);
     $stmt->bindValue(":connait_hotel_jardin", $connait_hotel_jardin);
     $stmt->bindValue(":connait_hotel_hameaux", $connait_hotel_hameaux);
-
+    $stmt->bindValue(":vtimestamp",$dateAleatoireSecond);
 
     $stmt->execute();
 
@@ -124,20 +135,12 @@ function newVisitor(){
     }
 
 
-    return [$visiteur_id, $departement, $departementNum];
+    return [$visiteur_id, $departement, $departementNum, $date];
 }
 
 function newVisite($visitor){
     global $pdo;
-    $dateEnd = new DateTime("2014-04-30", new DateTimeZone("Europe/Paris"));
-    $timeStampEnd = $dateEnd->getTimestamp();
-    $timeStampStart = $timeStampEnd - 15552000;
-    $dateAleatoireSecond = $timeStampStart + rand(0, 15552000);
-    $dateAleatoire = new DateTime();
-    $dateAleatoire->setTimestamp($dateAleatoireSecond);
-    $month = $dateAleatoire->format("m");
-    $year = 13;
-    $day = $dateAleatoire->format("d");
+
     if(rand(1,100)%2 == 0){
         $jour_passe_id = 1;
     } else {
@@ -202,7 +205,7 @@ function newVisite($visitor){
     } else {
         $panda_savoir  = 1;
     }
-    $saveVisiteSql = "INSERT INTO visite (visiteur_id , jour_passe_id , context_visite_id , duree_sejour_id , residence_id , temps_trajet_id , infos_par_web_zoo , infos_par_tel_zoo , satisfaction_zoo_id , manger_resto , resto_id , satisfaction_resto_id , remarque, programmation_id , qd_prog , panda_savoir , panda_decide , jour , mois , annee, departement_num, departement ) VALUES (:visiteur_id , :jour_passe_id , :context_visite_id , :duree_sejour_id , :residence_id , :temps_trajet_id , :infos_par_web_zoo , :infos_par_tel_zoo , :satisfaction_zoo_id , :manger_resto , :resto_id , :satisfaction_resto_id , :remarque , :programmation_id , :qd_prog , :panda_savoir , :panda_decide , :jour , :mois , :annee, :departement_num, :departement)";
+    $saveVisiteSql = "INSERT INTO visite (visiteur_id , jour_passe_id , context_visite_id , duree_sejour_id , residence_id , temps_trajet_id , infos_par_web_zoo , infos_par_tel_zoo , satisfaction_zoo_id , manger_resto , resto_id , satisfaction_resto_id , remarque, programmation_id , qd_prog , panda_savoir , panda_decide , jour , mois , annee, departement_num, departement, vtimestamp ) VALUES (:visiteur_id , :jour_passe_id , :context_visite_id , :duree_sejour_id , :residence_id , :temps_trajet_id , :infos_par_web_zoo , :infos_par_tel_zoo , :satisfaction_zoo_id , :manger_resto , :resto_id , :satisfaction_resto_id , :remarque , :programmation_id , :qd_prog , :panda_savoir , :panda_decide , :jour , :mois , :annee, :departement_num, :departement, :vtimestamp)";
     $stmt = $pdo->prepare($saveVisiteSql);
     $stmt->bindValue(":visiteur_id", $visitor[0]);
     $stmt->bindValue(":jour_passe_id", $jour_passe_id);
@@ -221,11 +224,12 @@ function newVisite($visitor){
     $stmt->bindValue(":qd_prog", $qd_prog);
     $stmt->bindValue(":panda_savoir", $panda_savoir);
     $stmt->bindValue(":panda_decide", $panda_decide);
-    $stmt->bindValue(":jour", $day);
-    $stmt->bindValue(":mois", $month);
-    $stmt->bindValue(":annee",$year);
+    $stmt->bindValue(":jour", $visitor[3][0]);
+    $stmt->bindValue(":mois", $visitor[3][1]);
+    $stmt->bindValue(":annee",$visitor[3][2]);
     $stmt->bindValue(":departement_num", $visitor[2]);
     $stmt->bindValue(":departement", $visitor[1]);
+    $stmt->bindValue(":vtimestamp", $visitor[3][3]);
     $stmt->execute();
 
     $connaissance_zoo_type_id = [];
@@ -243,8 +247,8 @@ function newVisite($visitor){
                 $sql = "INSERT INTO media_connaissance_zoo (visiteur_id, mois, annee, connaissance_zoo_type_id) VALUES (:visiteur_id, :mois, :annee, :connaissance_zoo_type_id)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindValue(":visiteur_id", $visitor[0]);
-                $stmt->bindValue(":mois", $month);
-                $stmt->bindValue(":annee",$year);
+                $stmt->bindValue(":mois", $visitor[3][1]);
+                $stmt->bindValue(":annee",$visitor[3][2]);
                 $stmt->bindValue(":connaissance_zoo_type_id", $v);
                 $stmt->execute();
             }
@@ -262,8 +266,8 @@ function newVisite($visitor){
                         $sql = "INSERT INTO affichage_type_visiteur_date (visiteur_id, mois, annee, affichage_type_id, paris, province) VALUES (:visiteur_id, :mois, :annee, :affichage_type_id, :paris, :province)";
                         $stmt = $pdo->prepare($sql);
                         $stmt->bindValue(":visiteur_id", $visitor[0]);
-                        $stmt->bindValue(":mois", $month);
-                        $stmt->bindValue(":annee",$year);
+                        $stmt->bindValue(":mois", $visitor[3][1]);
+                        $stmt->bindValue(":annee",$visitor[3][2]);
                         $stmt->bindValue(":affichage_type_id", $v);
 
                         if ($v > 0 && $v < 5) {
@@ -296,8 +300,8 @@ function newVisite($visitor){
                     $sql = "INSERT INTO pub_media_visiteur_date (visiteur_id, mois, annee, pub_media_id, paris, province) VALUES (:visiteur_id, :mois, :annee, :pub_media_id, :paris, :province)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindValue(":visiteur_id", $visitor[0]);
-                    $stmt->bindValue(":mois", $month);
-                    $stmt->bindValue(":annee",$year);;
+                    $stmt->bindValue(":mois", $visitor[3][1]);
+                    $stmt->bindValue(":annee",$visitor[3][2]);
                     $stmt->bindValue(":pub_media_id", $v);
                     $with_paris_province = [1,2];
                     if(in_array($v, $with_paris_province)){
@@ -329,8 +333,8 @@ function newVisite($visitor){
                     $sql = "INSERT INTO article_media_visiteur_date (visiteur_id, mois, annee, article_media_id) VALUES (:visiteur_id, :mois, :annee, :article_media_id)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindValue(":visiteur_id", $visitor[0]);
-                    $stmt->bindValue(":mois", $month);
-                    $stmt->bindValue(":annee",$year);
+                    $stmt->bindValue(":mois", $visitor[3][1]);
+                    $stmt->bindValue(":annee",$visitor[3][2]);
                     $stmt->bindValue(":article_media_id", $v);
                     $stmt->execute();
                 }
@@ -350,8 +354,8 @@ function newVisite($visitor){
                     $sql = "INSERT INTO prospectus_visiteur_date (visiteur_id, mois, annee, prospectus_id) VALUES (:visiteur_id, :mois, :annee, :prospectus_id)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->bindValue(":visiteur_id", $visitor[0]);
-                    $stmt->bindValue(":mois", $month);
-                    $stmt->bindValue(":annee",$year);
+                    $stmt->bindValue(":mois", $visitor[3][1]);
+                    $stmt->bindValue(":annee",$visitor[3][2]);
                     $stmt->bindValue(":prospectus_id", $v);
                     $stmt->execute();
                 }

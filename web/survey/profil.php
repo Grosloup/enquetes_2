@@ -30,6 +30,7 @@ $stmt->bindValue(":annee", $lastYear);
 $stmt->execute();
 $result = $stmt->fetchAll();
 $countOther = 0;
+
 for($i=10; $i<count($result); $i++){
     $countOther += $result[$i]["num"];
 }
@@ -105,22 +106,22 @@ include_once "sidebar.php";
                         <tr  style="background-color: #ff9341;">
                             <td>Région Centre</td>
                             <td><?php echo $effectifCentre; ?></td>
-                            <td><?php echo ($effectifCentre/$numEnquete)*100; ?></td>
+                            <td><?php if($numEnquete > 0) {echo ($effectifCentre/$numEnquete)*100;} ?></td>
                         </tr>
                         <tr  style="background-color: #8fc1ff;">
                             <td>Région Parisienne</td>
                             <td><?php echo $effectifParis; ?></td>
-                            <td><?php echo ($effectifParis/$numEnquete)*100; ?></td>
+                            <td><?php if($numEnquete > 0) {echo ($effectifParis/$numEnquete)*100;} ?></td>
                         </tr>
                         <tr style="background-color: #ffc839;">
                             <td>Départements limitrophes</td>
                             <td><?php echo $effectifLimit; ?></td>
-                            <td><?php echo ($effectifLimit/$numEnquete)*100; ?></td>
+                            <td><?php if($numEnquete > 0) {echo ($effectifLimit/$numEnquete)*100;} ?></td>
                         </tr>
                         <tr style="background-color: #73ba99;">
                             <td>Autres</td>
                             <td><?php echo $effectifAute; ?></td>
-                            <td><?php echo ($effectifAute/$numEnquete)*100;?></td>
+                            <td><?php if($numEnquete > 0) {echo ($effectifAute/$numEnquete)*100;}?></td>
                         </tr>
                         <tr style="background-color: #0073b9;">
                             <td>Total</td>
@@ -143,14 +144,18 @@ include_once "sidebar.php";
                 </tr>
                 </thead>
                 <tbody>
-                <?php for($i=0; $i<10; $i++): ?>
-                    <tr>
-                        <td><?php echo $result[$i]["departement_num"] . " - " . $result[$i]["departement"]; ?></td>
-                        <td><?php echo $result[$i]["num"]; ?></td>
-                        <td><?php echo ($result[$i]["num"]/$numEnquete)*100; ?></td>
+                <?php if($result): ?>
+                    <?php for($i=0; $i<10; $i++): ?>
+                        <tr>
+                            <td><?php echo $result[$i]["departement_num"] . " - " . $result[$i]["departement"]; ?></td>
+                            <td><?php echo $result[$i]["num"]; ?></td>
+                            <td><?php if($numEnquete > 0){echo ($result[$i]["num"]/$numEnquete)*100;}  ?></td>
 
-                    </tr>
-                <?php endfor; ?>
+                        </tr>
+                    <?php endfor; ?>
+                <?php else: ?>
+
+                <?php endif; ?>
                 <tr>
                     <td>Autres</td>
                     <td><?php echo $countOther; ?></td>
