@@ -10,6 +10,7 @@ web/scss/
 web/img/
 web/js/vendor/
 web/js/tests/
+web/survey/back/
 libs/
 
 logs/
