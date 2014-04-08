@@ -60,13 +60,17 @@
             setMaxHeight(sidebar, wrapper);
         },false);
 
-        menuTogglerBtn.addEventListener("click", function(e){
+        menuTogglerBtn.addEventListener("click", function(evt){
+            evt.preventDefault();
             if(html.classList.contains("open-menu")){
                 html.classList.remove("open-menu");
             } else {
                 html.classList.add("open-menu");
             }
-        },false)
+        },false);
+
+
+
 
     })(window,document);
 </script>
