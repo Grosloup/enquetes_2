@@ -10,6 +10,7 @@ function capitalizr(word){
 }
 
 mainApp.controller("LastMonthCtrl", ["$scope","$http", function($scope, $http){
+    $scope.isloaded = false;
     // mois en cours => mois dernier
     var today = new Date();
     var lastMonth, lastMonthYear, currentMonth = today.getMonth(), currentYear = today.getFullYear();
@@ -22,12 +23,29 @@ mainApp.controller("LastMonthCtrl", ["$scope","$http", function($scope, $http){
     }
 
     $scope.lastMonth = capitalizr(Monthes[lastMonth]);
+    $scope.lastMonthYear = lastMonthYear;
+    $scope.infos = "";
 
     // recup nombre enquetes pour le mois dernier:
 
     $http.get("/survey/api/last-month.php", {params:{"lastMonth": lastMonth + 1, "lastMonthYear": lastMonthYear}})
-        .success(function(data, status, headers, config){})
-        .error(function(data, status, headers, config){});
+        .success(function(data, status, headers, config){
+            $scope.isloaded = true;
+            if(!data.errors){
+                var numEnquetes = parseInt(data.datas["nombre_enquetes"]);
+
+                if(numEnquetes == 0){
+
+                } else if(numEnquetes <= 50){
+
+                } else {
+
+                }
+            } else {
+
+            }
+        })
+        .error(function(data, status, headers, config){ /* relance */});
 
 
 

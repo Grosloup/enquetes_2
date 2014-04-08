@@ -1,6 +1,13 @@
 <div ng-controller="LastMonthCtrl">
 
-    {{lastMonth}}
+    <div class="row">
+        <div class="col col1"></div>
+        <div class="col col4 loader-parent">
+            <h3 class="text-center">Les Statistiques pour le mois de {{lastMonth}} {{lastMonthYear}}</h3>
+            <span class="loader" ng-hide="isloaded">loading...</span>
+        </div>
+        <div class="col col1"></div>
+    </div>
 
 
 
