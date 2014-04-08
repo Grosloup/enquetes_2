@@ -25,7 +25,7 @@ if( isGet() && isAjax()){
         $errors[] = "lastMonth est manquant.";
     }
     if(isset($_GET["lastMonthYear"]) && $_GET["lastMonthYear"] != null){
-        if(!is_numeric($_GET["lastMonthYear"]) || $_GET["lastMonthYear"] < 2010){
+        if(!is_numeric($_GET["lastMonthYear"]) || $_GET["lastMonthYear"] < 2009){
             // error
             $errors[] = "lastMonthYear n'est pas du bon type.";
         }
@@ -36,16 +36,19 @@ if( isGet() && isAjax()){
 
     if($errors == null){
         header("Content-Type: application/json; charset=utf-8");
-        $sql = "SELECT COUNT(*) as num FROM visite WHERE mois=:mois AND annee=:annee";
+        $twoDigitsYear = $_GET["lastMonthYear"] - 2000;
+        /*$sql = "SELECT COUNT(*) as num FROM visite WHERE mois=:mois AND annee=:annee";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":mois", $_GET["lastMonth"]);
-        $stmt->bindValue(":annee", $_GET["lastMonthYear"]);
+        $stmt->bindValue(":annee", $twoDigitsYear);
         $stmt->execute();
-        $result = $stmt->fetch();
+        $result = $stmt->fetch();*/
 
-        $response["datas"] = ["nombre_enquetes"=>$result["num"], "mois"=>$_GET["lastMonth"], "annee"=>$_GET["lastMonthYear"]];
-        // TODO[Nicolas] enlever sleep test loader
-        sleep(3); // test loader
+        $result = getNumSurveyByMonthAndYear($_GET["lastMonth"], $twoDigitsYear);
+        $totalYear = getNumTotalSurvey($twoDigitsYear);
+
+        $response["datas"] = ["nombre_enquetes"=>$result, "mois"=>$_GET["lastMonth"], "annee"=>$_GET["lastMonthYear"], "enquetes_total_annee"=>$totalYear];
+
         echo json_encode($response);
 
         die();

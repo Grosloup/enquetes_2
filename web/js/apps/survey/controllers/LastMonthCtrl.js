@@ -36,14 +36,14 @@ mainApp.controller("LastMonthCtrl", ["$scope", "$sce", "$http", function($scope,
         .success(function(data, status, headers, config){
             $scope.isloaded = true;
             if(!data.errors){
-                var numEnquetes = parseInt(data.datas["nombre_enquetes"]);
-
+                var numEnquetes = data.datas["nombre_enquetes"] != null ? parseInt(data.datas["nombre_enquetes"]) : 0;
+                var totalEnquetes = data.datas["enquetes_total_annee"] != null ? parseInt(data.datas["enquetes_total_annee"]) : 0;
                 if(numEnquetes == 0){
-                   $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Il n'y a pas (encore) de données enregistrées pour le mois de " + $scope.lastMonth + ".";
+                   $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Il n'y a pas (encore) de données enregistrées pour le mois de " + $scope.lastMonth + ". Le nombre total d'enquêtes depuis le début de l'année est de " + totalEnquetes + ".";
                 } else if(numEnquetes <= 100){
-                    $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre d'enquêtes enregistrées pour le mois de " + $scope.lastMonth + " est inférieur à 100 (" + numEnquetes + "). Nombre insuffisant pour que le dépouillement des ces données soit révélateur d'une tendance.";
+                    $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre d'enquêtes enregistrées pour le mois de " + $scope.lastMonth + " est inférieur à 100 (" + numEnquetes + "). Nombre insuffisant pour que le dépouillement des ces données soit révélateur d'une tendance. Le nombre total d'enquêtes depuis le début de l'année est de " + totalEnquetes + ".";
                 } else {
-                    $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre d'enquêtes enregistrées pour le mois de " + $scope.lastMonth + " est de " + numEnquetes;
+                    $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre d'enquêtes enregistrées pour le mois de " + $scope.lastMonth + " est de " + numEnquetes + ". Le nombre total d'enquêtes depuis le début de l'année est de " + totalEnquetes + ".";
                 }
             } else {
 

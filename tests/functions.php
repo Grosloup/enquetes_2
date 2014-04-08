@@ -47,7 +47,7 @@ function newVisitor(){
     $nom = "Dupont";
     $prenom = "Albert";
     $email = "al.pon@mail.com";
-    $n = rand(0,99);
+    $n = rand(0,100);
     $departement = array_values($departements)[$n];
     $departementNum = array_keys($departements)[$n];
     if($n == 100){
@@ -86,16 +86,25 @@ function newVisitor(){
         $nbreVisite = null;
     }
 
-    $dateEnd = new DateTime("2014-04-30", new DateTimeZone("Europe/Paris"));
+    $dateEnd = new DateTime("2014-03-31", new DateTimeZone("Europe/Paris"));
     $timeStampEnd = $dateEnd->getTimestamp();
-    $timeStampStart = $timeStampEnd - 15552000;
-    $dateAleatoireSecond = $timeStampStart + rand(0, 15552000);
+
+    $dateStart = new DateTime("2014-01-01", new DateTimeZone("Europe/Paris"));
+    $timeStampStart = $dateStart->getTimestamp();
+
+    $delta = $timeStampEnd - $timeStampStart;
+
+    $dateAleatoireSecond = $timeStampStart + rand(0, $delta);
+
     $dateAleatoire = new DateTime();
     $dateAleatoire->setTimestamp($dateAleatoireSecond);
-    $month = $dateAleatoire->format("m");
-    $year = 13;
+
     $day = $dateAleatoire->format("d");
+    $month = $dateAleatoire->format("m");
+    $year = $dateAleatoire->format("y");
+
     $date = [$day,$month,$year,$dateAleatoireSecond];
+
     $saveUserSql = "INSERT INTO visiteur (genre, nom, prenom, email, veux_infos_zoo, veux_infos_hotel, departement_num, departement, pays, deja_venu, derniere_visite_id, nombre_visite_id, connait_hotel_jardin, connait_hotel_hameaux, vtimestamp ) VALUES (:genre, :nom, :prenom, :email, :veux_infos_zoo, :veux_infos_hotel, :departement_num, :departement, :pays, :deja_venu, :derniere_visite_id, :nombre_visite_id, :connait_hotel_jardin, :connait_hotel_hameaux, :vtimestamp)";
 
     $stmt = $pdo->prepare($saveUserSql);

@@ -34,3 +34,31 @@ function pseudoExists($pseudo){
     $user = $stmt->fetch();
     return $user;
 }
+
+function getNumTotalSurvey($year = 14){
+    global $pdo;
+    if(!is_numeric($year) || !preg_match("/^[1-4][0-9]$/", $year)){
+        return null;
+    }
+    $sql = "SELECT COUNT() as totalSurvey FROM visite WHERE annee=:annee";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":annee", $year);
+    $stmt->execute();
+    return $stmt->fetch()["totalSurvey"];
+}
+
+function getNumSurveyByMonthAndYear($month = 1, $year = 14){
+    global $pdo;
+    if(!is_numeric($year) || !preg_match("/^[1-4][0-9]$/", $year)){
+        return null;
+    }
+    if(!is_numeric($month) || !preg_match("/^[1-9]|1[0-2]$/", $month)){
+        return null;
+    }
+    $sql = "SELECT COUNT() as totalMonthSurvey FROM visite WHERE mois=:mois AND annee=:annee";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":mois", $month);
+    $stmt->bindValue(":annee", $year);
+    $stmt->execute();
+    return $stmt->fetch()["totalMonthSurvey"];
+}

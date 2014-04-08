@@ -13,27 +13,19 @@
             <?php echo $loginMessage; ?>
         </div>
     <?php endif; ?>
-
-
     <form action="" method="post">
-
         <div class="field">
             <input type="text" name="login_form[pseudo]" id="pseudo"/><label for="pseudo" id="lPseudo">Pseudo</label>
         </div>
-
         <div class="field">
             <input type="password" name="login_form[password]" id="password"/><label for="password" id="lPassword">Mot de passe</label>
         </div>
-
         <div class="field">
             <button type="submit">Connexion</button>
         </div>
-
     </form>
-
-
-
 </div>
+
 <script>
     (function(w,d){
         var login = d.querySelector("#pseudo");
