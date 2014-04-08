@@ -35,7 +35,7 @@ mainApp.controller("LastMonthCtrl", ["$scope","$http", function($scope, $http){
                 var numEnquetes = parseInt(data.datas["nombre_enquetes"]);
 
                 if(numEnquetes == 0){
-
+                   $scope.infos = "Il n'y a pas (encore) de données enregistrées pour le mois de " + $scope.lastMonth + ".";
                 } else if(numEnquetes <= 50){
 
                 } else {

@@ -57,6 +57,8 @@ if( isGet() && isAjax()){
         $result = $stmt->fetch();
 
         $response["datas"] = ["nombre_enquetes"=>$result["num"], "mois"=>$_GET["lastMonth"], "annee"=>$_GET["lastMonthYear"]];
+        // TODO[Nicolas] enlever sleep test loader
+        sleep(3); // test loader
         echo json_encode($response);
 
         die();

@@ -13,7 +13,12 @@
 
 <div id="wrapper">
     <div id="sidebar">
-
+        <ul>
+            <li><a href="#/">Accueil</a></li>
+            <li><a href="#/last-month">Les Stat' du mois dernier</a></li>
+            <li><a href="#/cumul">Le cumul de l'année</a></li>
+            <li><a href="#/period">Choisissez votre période</a></li>
+        </ul>
     </div>
     <div id="main">
         <div ng-view=""></div>
