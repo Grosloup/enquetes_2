@@ -1,4 +1,4 @@
-# project_title
+# Enquetes_2
 
 
 
@@ -9,6 +9,9 @@
 
 
 ### Javascript Librairies
+- AngularJS v1.2.15
+- jQuery v2.1.0
 
 
 ### Fonts & Icons
+- Font Awesome 4.0.3
