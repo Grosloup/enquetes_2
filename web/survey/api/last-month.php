@@ -7,20 +7,7 @@
  */
 include_once "connection.php";
 
-function isPost(){
-    return strtolower($_SERVER["REQUEST_METHOD"]) === "post";
-}
-
-function isGet(){
-    return strtolower($_SERVER["REQUEST_METHOD"]) === "get";
-}
-
-function isAjax(){
-    if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"]) == "xmlhttprequest"){
-        return true;
-    }
-    return false;
-}
+include_once "../../../libs/functions.php";
 
 if( isGet() && isAjax()){
 

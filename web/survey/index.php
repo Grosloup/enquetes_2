@@ -7,17 +7,44 @@
  */
 session_start();
 
+include_once "site_connexion.php";
+include_once "../../libs/PasswordLib/PasswordLib.php";
+include_once "../../libs/functions.php";
+
 if(empty($_SESSION["user"])){
-
+    $loginError = false;
+    $loginMessage = "";
     if(!empty($_POST) && isset($_POST["login_form"])){
-        if($_POST["login_form"]["pseudo"] == "nico" && $_POST["login_form"]["password"] =="nico"){
-            $bodyFile = "body.php";
 
-            $_SESSION["user"] = ["pseudo"=>"nico", "id"=>1];
-
-            $_SESSION["isConnected"] = true;
+        if(isset($_POST["login_form"]["pseudo"]) && $_POST["login_form"]["pseudo"] != "" && isset($_POST["login_form"]["password"]) && $_POST["login_form"]["password"] != ""){
+            $user = pseudoExists($_POST["login_form"]["pseudo"]);
+            if($user){
+                $passLib = new \PasswordLib\PasswordLib();
+                if($passLib->verifyPasswordHash($_POST["login_form"]["password"], $user["password"])){
+                    $loginError = false;
+                    $bodyFile = "body.php";
+                    $_SESSION["user"] = ["pseudo"=>$user["pseudo"], "id"=>$user["id"], "email"=>$user["email"], "nom"=>$user["nom"], "prenom"=>$user["prenom"]];
+                    $_SESSION["isConnected"] = true;
+                } else {
+                    // mauvais password
+                    $loginError = true;
+                    $loginMessage = "Identifiants incorrects";
+                    $bodyFile = "login.php";
+                }
+            } else {
+                // pseudo n'existe pas
+                $loginMessage = "Identifiants incorrects";
+                $loginError = true;
+                $bodyFile = "login.php";
+            }
+        } else {
+            // champs manquants
+            $loginMessage = "Informations manquantes, tous les champs sont requis";
+            $loginError = true;
+            $bodyFile = "login.php";
         }
     } else {
+
         $bodyFile = "login.php";
     }
 

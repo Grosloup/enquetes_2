@@ -11,7 +11,8 @@ web/scss/
 web/js/vendor/
 web/js/tests/
 web/survey/back/
-libs/
+libs/PHPExcel
+libs/PasswordLib
 
 logs/
 docs/

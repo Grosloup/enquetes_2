@@ -6,7 +6,8 @@
 ## Requirements
 
 ### PHP Librairies
-
+- PHPExcel
+- PasswordLib
 
 ### Javascript Librairies
 - AngularJS v1.2.15

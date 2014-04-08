@@ -7,8 +7,13 @@
  */
 ?>
 
-
 <div id="login-box">
+    <?php if($loginError): ?>
+        <div class="message message-error">
+            <?php echo $loginMessage; ?>
+        </div>
+    <?php endif; ?>
+
 
     <form action="" method="post">
 
@@ -25,6 +30,8 @@
         </div>
 
     </form>
+
+
 
 </div>
 <script>
