@@ -9,6 +9,12 @@
 
 <div id="topnav-bar">
     <button id="sidebar-toggler"></button>
+    <div class="nav nav-right">
+        <ul>
+            <li><a href="/survey/index.php?p=mon-compte">Mon compte</a></li>
+            <li><a href="/survey/index.php?p=logout">Déconnexion</a></li>
+        </ul>
+    </div>
 </div>
 
 <div id="wrapper">
@@ -18,7 +24,11 @@
             <li><a href="#/last-month">Les Stat' du mois dernier</a></li>
             <li><a href="#/cumul">Le cumul de l'année</a></li>
             <li><a href="#/period">Choisissez votre période</a></li>
+            <li><a href="#/period">Et plus encore</a></li>
         </ul>
+
+
+
     </div>
     <div id="main">
         <div ng-view=""></div>

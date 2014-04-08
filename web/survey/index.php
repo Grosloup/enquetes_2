@@ -22,7 +22,27 @@ if(empty($_SESSION["user"])){
     }
 
 } else {
-    $bodyFile = "body.php";
+    if(!empty($_GET)){
+        if(isset($_GET["p"])){
+            if($_GET["p"]=="logout"){
+                // destruction de la session
+                $_SESSION = [];
+                if (ini_get("session.use_cookies")) {
+                    $params = session_get_cookie_params();
+                    setcookie(session_name(), '', time() - 42000,$params["path"], $params["domain"],$params["secure"], $params["httponly"]);
+                }
+                session_destroy();
+                // redirection vers accueil
+                header("Location: /survey/index.php");
+                die();
+
+            } elseif ($_GET["p"]=="mon-compte"){
+                $bodyFile = "mon-compte.php";
+            }
+        }
+    } else {
+        $bodyFile = "body.php";
+    }
 }
 
 

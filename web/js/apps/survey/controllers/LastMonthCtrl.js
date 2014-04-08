@@ -39,11 +39,11 @@ mainApp.controller("LastMonthCtrl", ["$scope", "$sce", "$http", function($scope,
                 var numEnquetes = parseInt(data.datas["nombre_enquetes"]);
 
                 if(numEnquetes == 0){
-                   $scope.infos = "Il n'y a pas (encore) de données enregistrées pour le mois de " + $scope.lastMonth + ".";
+                   $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Il n'y a pas (encore) de données enregistrées pour le mois de " + $scope.lastMonth + ".";
                 } else if(numEnquetes <= 100){
-                    $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre d'enquêtes enregistrées pour le mois de " + $scope.lastMonth + " est inférieur à 100. Nombre insuffisant pour que le dépouillement des ces données soit révélateur d'une tendance.";
+                    $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre d'enquêtes enregistrées pour le mois de " + $scope.lastMonth + " est inférieur à 100 (" + numEnquetes + "). Nombre insuffisant pour que le dépouillement des ces données soit révélateur d'une tendance.";
                 } else {
-
+                    $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre d'enquêtes enregistrées pour le mois de " + $scope.lastMonth + " est de " + numEnquetes;
                 }
             } else {
 
