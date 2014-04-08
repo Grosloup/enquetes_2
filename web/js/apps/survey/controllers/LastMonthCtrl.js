@@ -9,7 +9,7 @@ function capitalizr(word){
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-mainApp.controller("LastMonthCtrl", ["$scope","$http", function($scope, $http){
+mainApp.controller("LastMonthCtrl", ["$scope", "$sce", "$http", function($scope, $sce, $http){
     $scope.isloaded = false;
     // mois en cours => mois dernier
     var today = new Date();
@@ -26,6 +26,10 @@ mainApp.controller("LastMonthCtrl", ["$scope","$http", function($scope, $http){
     $scope.lastMonthYear = lastMonthYear;
     $scope.infos = "";
 
+    $scope.trustHtmlMessage = function(message){
+        return $sce.trustAsHtml(message);
+    };
+
     // recup nombre enquetes pour le mois dernier:
 
     $http.get("/survey/api/last-month.php", {params:{"lastMonth": lastMonth + 1, "lastMonthYear": lastMonthYear}})
@@ -36,8 +40,8 @@ mainApp.controller("LastMonthCtrl", ["$scope","$http", function($scope, $http){
 
                 if(numEnquetes == 0){
                    $scope.infos = "Il n'y a pas (encore) de données enregistrées pour le mois de " + $scope.lastMonth + ".";
-                } else if(numEnquetes <= 50){
-
+                } else if(numEnquetes <= 100){
+                    $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre d'enquêtes enregistrées pour le mois de " + $scope.lastMonth + " est inférieur à 100. Nombre insuffisant pour que le dépouillement des ces données soit révélateur d'une tendance.";
                 } else {
 
                 }

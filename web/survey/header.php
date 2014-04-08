@@ -25,6 +25,7 @@
     <?php if(isset($_SESSION["isConnected"]) && $_SESSION["isConnected"]): ?>
         <script src="/js/vendor/angular.js"></script>
         <script src="/js/vendor/angular-route.js"></script>
+        <script src="/js/vendor/angular-sanitize.js"></script>
 
     <?php endif; ?>
 </head>
