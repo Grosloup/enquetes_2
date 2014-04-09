@@ -34,9 +34,9 @@ $countOther = 0;
 for($i=10; $i<count($result); $i++){
     $countOther += $result[$i]["num"];
 }
-$depsCentre = [18,28,36,37,41,45];
-$depsParis = [75,77,78,91,92,93,94,95];
-$depsLimit = [03,23,49,58,72,86,87,89];
+$depsCentre = ["18","28","36","37","41","45"];
+$depsParis = ["75","77","78","91","92","93","94","95"];
+$depsLimit = ["03","23","49","58","72","86","87","89"];
 
 $effectifCentre = null;
 $effectifParis = null;

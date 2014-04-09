@@ -30,6 +30,7 @@ $departements = [
     "100" => "Etranger",
 ];
 include_once "../../datas/pays.php";
+include_once "../../datas/prenoms.php";
 
 try {
     $pdo = new PDO("sqlite:../../db/enquetes.sqlite3");
@@ -41,22 +42,45 @@ try {
 function newVisitor(){
     global $departements;
     global $pays;
+    global $prenoms;
     global $pdo;
-
+    $n = rand(0,250);
     $genre = "Mr";
-    $nom = "Dupont";
-    $prenom = "Albert";
-    $email = "al.pon@mail.com";
-    $n = rand(0,100);
-    $departement = array_values($departements)[$n];
-    $departementNum = array_keys($departements)[$n];
-    if($n == 100){
-        $np = rand(0,6);
-        $_pays = $pays[$np];
-    } else {
-        $_pays = "France";
-    }
+    $nom = $prenoms[$n];
+    $n = rand(0,250);
+    $prenom = $prenoms[$n];
+    $email = $prenom . "." . $nom . "@mail.com";
 
+    $pondereDepts = [1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,];
+    shuffle($pondereDepts);
+    $n = rand(0,26);
+    $depsCentre = ["18","28","36","37","41","45"];
+    $depsParis = ["75","77","78","91","92","93","94","95"];
+    $depsLimit = ["03","23","49","58","72","86","87","89"];
+    $_pays = "France";
+    if($n==1){
+        $t = rand(0, 5);
+        $departementNum = $depsCentre[$t];
+        $departement = $departements[$departementNum];
+    } elseif($n==2){
+        $t = rand(0, 7);
+        $departementNum = $depsParis[$t];
+        $departement = $departements[$departementNum];
+    } elseif($n==3){
+        $t = rand(0, 7);
+        $departementNum = $depsLimit[$t];
+        $departement = $departements[$departementNum];
+    } else {
+        $t = rand(0,100);
+        $departement = array_values($departements)[$t];
+        $departementNum = array_keys($departements)[$t];
+        if($t == 100){
+            $np = rand(0,6);
+            $_pays = $pays[$np];
+        } else {
+            $_pays = "France";
+        }
+    }
     if(rand(1,100)%2 == 0){
         $deja_venu = 1;
     } else {
@@ -86,7 +110,21 @@ function newVisitor(){
         $nbreVisite = null;
     }
 
-    $dateEnd = new DateTime("2014-03-31", new DateTimeZone("Europe/Paris"));
+    $pondereMonth = ["01","01","02","02","02","02","02","03","03","04","04","04","04","04","04","05","05","05","05","06","06","06","06","07","07","07","07","07","07","07","07","07","07","08","08","08","08","08","08","08","08","08","08","09","09","09","10","10","11","11","11","12","12"];
+    shuffle($pondereMonth);
+    $tMonth = rand(0, count($pondereMonth)-1);
+    $theMonth = $pondereMonth[$tMonth];
+    if(in_array($theMonth,["01","03","05","07","08","10","12"])){
+        $days31=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"];
+        $theDay = $days31[rand(0,30)];
+    } elseif (in_array($theMonth,["04","06","09","11"])){
+        $days30=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
+        $theDay = $days30[rand(0,29)];
+    } else {
+        $days28=["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28"];
+        $theDay = $days28[rand(0,27)];
+    }
+    /*$dateEnd = new DateTime("2014-12-31", new DateTimeZone("Europe/Paris"));
     $timeStampEnd = $dateEnd->getTimestamp();
 
     $dateStart = new DateTime("2014-01-01", new DateTimeZone("Europe/Paris"));
@@ -97,8 +135,9 @@ function newVisitor(){
     $dateAleatoireSecond = $timeStampStart + rand(0, $delta);
 
     $dateAleatoire = new DateTime();
-    $dateAleatoire->setTimestamp($dateAleatoireSecond);
-
+    $dateAleatoire->setTimestamp($dateAleatoireSecond);*/
+    $dateAleatoire = DateTime::createFromFormat("d-m-Y", $theDay."-".$theMonth."-2014");
+    $dateAleatoireSecond = $dateAleatoire->getTimestamp();
     $day = $dateAleatoire->format("d");
     $month = $dateAleatoire->format("m");
     $year = $dateAleatoire->format("y");
