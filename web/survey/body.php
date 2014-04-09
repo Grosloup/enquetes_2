@@ -8,7 +8,13 @@
 ?>
 
 <div id="topnav-bar">
-    <button id="sidebar-toggler"></button>
+
+    <div class="nav">
+        <ul>
+            <li><button id="sidebar-toggler"></button></li>
+            <li><button id="back-btn" ng-click="back()" ng-show="slider.back"></button></li>
+        </ul>
+    </div>
     <div class="nav nav-right">
         <ul>
             <li><a href="/survey/index.php?p=mon-compte">Mon compte</a></li>
@@ -16,22 +22,18 @@
         </ul>
     </div>
 </div>
-
 <div id="wrapper">
     <div id="sidebar">
-        <ul>
-            <li><a href="#/">Accueil</a></li>
-            <li><a href="#/last-month">Les Stat' du mois dernier</a></li>
-            <li><a href="#/cumul">Le cumul de l'année</a></li>
-            <li><a href="#/period">Choisissez votre période</a></li>
-            <li><a href="#/period">Et plus encore</a></li>
+        <ul id="sb-menu">
+            <li><a href="#/" class="sb-menu-item" ng-click="setDirection()">Accueil</a></li>
+            <li><a href="#/last-month" class="sb-menu-item" ng-click="setDirection()">Les Stat' du mois dernier</a></li>
+            <li><a href="#/cumul" class="sb-menu-item" ng-click="setDirection()">Le cumul de l'année</a></li>
+            <li><a href="#/period" class="sb-menu-item" ng-click="setDirection()">Choisissez votre période</a></li>
+            <li><a href="#/period" class="sb-menu-item" ng-click="setDirection()">Et plus encore</a></li>
         </ul>
-
-
-
     </div>
     <div id="main">
-        <div ng-view=""></div>
+        <div class="page {{slider.direction}}" ng-view=""></div>
     </div>
 </div>
 
@@ -78,6 +80,17 @@
                 html.classList.add("open-menu");
             }
         },false);
+
+        var sbMenuItems = d.querySelectorAll(".sb-menu-item");
+        [].slice.call(sbMenuItems).forEach(function(el){
+           el.addEventListener("click", function(){
+               if(html.classList.contains("open-menu")){
+                   html.classList.remove("open-menu");
+               } else {
+                   html.classList.add("open-menu");
+               }
+           })
+        });
 
 
 

@@ -14,5 +14,6 @@
 - jQuery v2.1.0
 
 
-### Fonts & Icons
+### Fonts & Icons & CSS
 - Font Awesome 4.0.3
+- Animate.css

@@ -20,12 +20,14 @@
     <title>Statistiques sorties des enquêtes</title>
     <link rel="stylesheet" href="/css/survey.css"/>
     <link rel="stylesheet" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/css/animate.min.css"/>
     <script src="/js/vendor/modernizr.js"></script>
 
     <?php if(isset($_SESSION["isConnected"]) && $_SESSION["isConnected"]): ?>
         <script src="/js/vendor/angular.js"></script>
         <script src="/js/vendor/angular-route.js"></script>
         <script src="/js/vendor/angular-sanitize.js"></script>
+        <script src="/js/vendor/angular-animate.js"></script>
 
     <?php endif; ?>
 </head>
