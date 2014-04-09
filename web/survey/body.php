@@ -100,3 +100,4 @@
 <script src="/js/apps/survey/main.js"></script>
 <script src="/js/apps/survey/controllers/MainCtrl.js"></script>
 <script src="/js/apps/survey/controllers/LastMonthCtrl.js"></script>
+<script src="/js/apps/survey/controllers/CumulCtrl.js"></script>

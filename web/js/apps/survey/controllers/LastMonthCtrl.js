@@ -14,6 +14,7 @@ mainApp.controller("LastMonthCtrl", ["$scope", "$sce", "$http", function($scope,
     // mois en cours => mois dernier
     var today = new Date();
     var lastMonth, lastMonthYear, currentMonth = today.getMonth(), currentYear = today.getFullYear();
+
     if(currentMonth == 0){
         lastMonth = 11;
         lastMonthYear = currentYear - 1;

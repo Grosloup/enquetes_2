@@ -1,4 +1,4 @@
-var mainApp = angular.module("MainApp", ["ngRoute", "ngSanitize", "ngAnimate"]);
+var mainApp = angular.module("MainApp", ["ngRoute", "ngSanitize", "ngAnimate", "angles"]);
 
 
 

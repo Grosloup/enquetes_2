@@ -1,1 +1,61 @@
-cumul
+<div ng-controller="CumulCtrl">
+    <div class="row">
+        <div class="col col1"></div>
+        <div class="col col4 loader-parent">
+            <h3 class="page-header">Le cumul de l'année {{fullYear}}</h3>
+            <span class="loader" ng-hide="isloaded">loading...</span>
+        </div>
+        <div class="col col1"></div>
+    </div>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <p class="messanger-simple text-center"><span ng-bind-html="trustHtmlMessage(infos)"></span></p>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <canvas linechart options="chartOptions" data="chart" height="0" width="0"  resize="true"></canvas>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Mois de l'année {{fullYear}}</th>
+                        <th>Effectifs</th>
+                        <th>%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="eff in effectifs">
+                        <td>{{monthes[$index]}}</td>
+                        <td>{{eff["effectifs_mois"]}}</td>
+                        <td>{{eff["percent_mois"]}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>{{numEnquetes}}</td>
+                        <td>100%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+</div>
