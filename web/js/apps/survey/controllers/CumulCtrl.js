@@ -46,6 +46,8 @@ mainApp.controller("CumulCtrl", ["$scope", "$sce", "$http", "appCache", function
         return $sce.trustAsHtml(message);
     };
 
+    // TODO[Nicolas] refactoriser
+
     if(appCache["cumul_annee"] && ts < (appCache["cumul_annee"]["ts"] + 57600)){
         $scope.isloaded = true;
         $scope.numEnquetes = appCache["cumul_annee"].value["nombre_enquetes"];
@@ -86,11 +88,12 @@ mainApp.controller("CumulCtrl", ["$scope", "$sce", "$http", "appCache", function
                     }
 
                 } else {
-
+                    // TODO[Nicolas] relance en cas d'erreur
                 }
             })
             .error(function(data,status,headers,config){
                 /* relance */
+                // TODO[Nicolas] relance en cas d'erreur serveur
             });
     }
 
