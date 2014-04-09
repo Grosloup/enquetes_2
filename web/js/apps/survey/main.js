@@ -13,3 +13,6 @@ mainApp.config(["$routeProvider","$httpProvider", function($routeProvider, $http
         .when("/period", { templateUrl: "/templates/survey/period.html"})
         .otherwise({redirectTo: "/"});
 }]);
+
+
+mainApp.value("appCache", {});

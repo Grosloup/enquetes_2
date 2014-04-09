@@ -23,20 +23,25 @@ if( isGet() && isAjax() ){
 
     if($errors == null){
         header("Content-Type: application/json; charset=utf-8");
-        $twoDigitsYear = $_GET["year"] - 2000;
-
-        $totalYear = getNumTotalSurvey($twoDigitsYear);
-
-        $effectifsAnnee = [];
-
-        for($i=0; $i<12; $i++){
-            $effectifMois = getNumSurveyByMonthAndYear($i+1, $twoDigitsYear);
-            $percent = round(($effectifMois / $totalYear)*100, 2);
-
-            $effectifsAnnee[] = ["effectifs_mois"=>$effectifMois, "percent_mois"=>$percent];
+        $filename = "./cache/cumul.php";
+        $now = new DateTime(null, new DateTimeZone("Europe/Paris"));
+        $ts = $now->getTimestamp();
+        if(file_exists($filename) && $ts < (filemtime($filename)+ 86400)){
+            $response["datas"] = include_once "./cache/cumul.php";
+        } else {
+            $twoDigitsYear = $_GET["year"] - 2000;
+            $totalYear = getNumTotalSurvey($twoDigitsYear);
+            $effectifsAnnee = [];
+            for($i=0; $i<12; $i++){
+                $effectifMois = getNumSurveyByMonthAndYear($i+1, $twoDigitsYear);
+                $percent = round(($effectifMois / $totalYear)*100, 2);
+                $effectifsAnnee[] = ["effectifs_mois"=>$effectifMois, "percent_mois"=>$percent];
+            }
+            $response["datas"] = ["nombre_enquetes"=>$totalYear, "annee"=> $_GET["year"], "effectifs_annee"=>$effectifsAnnee];
+            $string = '<?php return ' . var_export($response["datas"], true) . "; ?>" ;
+            file_put_contents($filename, $string);
         }
 
-        $response["datas"] = ["nombre_enquetes"=>$totalYear, "annee"=> $_GET["year"], "effectifs_annee"=>$effectifsAnnee];
 
         echo json_encode($response);
 
