@@ -1,0 +1,134 @@
+<div ng-controller="GeoRepartCtrl">
+    <div class="row">
+        <div class="col col1"></div>
+        <div class="col col4 loader-parent">
+            <h3 class="page-header">Régions et départements les plus cités</h3>
+            <span class="loader" ng-hide="isloaded">loading...</span>
+        </div>
+        <div class="col col1"></div>
+    </div>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <p class="messanger-simple text-center"><span ng-bind-html="trustHtmlMessage(infos)"></span></p>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">Les départements les plus représentés</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Département</th>
+                        <th>Effectifs</th>
+                        <th>%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dept in datas.top_depts">
+                        <td>{{dept.dept}} - {{dept.dept_name}}</td>
+                        <td>{{dept.num}}</td>
+                        <td>{{dept.percent}}</td>
+                    </tr>
+                    <tr>
+                        <td>Autres</td>
+                        <td>{{datas.others.num}}</td>
+                        <td>{{datas.others.percent}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{numEnquetes}}</td>
+                        <td>100%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">Effectifs par zones</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col3">
+                <canvas piechart options="chartOptions" data="chart.data" width="0" height="0" resize="true"></canvas></canvas>
+            </div>
+            <div class="col col1">
+                <table class="table-regular">
+                    <tr ng-repeat="legend in chart.legend">
+                        <td style="background-color: {{legend.color}};color:#fff;font-size:80%;">{{legend.name}} {{legend.percent}}%</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col col1"></div>
+        </div>
+
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Régions</th>
+                        <th>Effectifs</th>
+                        <th>%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Région Centre</td>
+                        <td>{{datas.effectifs_par_zone.centre.num}}</td>
+                        <td>{{datas.effectifs_par_zone.centre.percent}}</td>
+                    </tr>
+                    <tr>
+                        <td>Région Parisienne</td>
+                        <td>{{datas.effectifs_par_zone.paris.num}}</td>
+                        <td>{{datas.effectifs_par_zone.paris.percent}}</td>
+                    </tr>
+                    <tr>
+                        <td>Départements limitrophes</td>
+                        <td>{{datas.effectifs_par_zone.limit.num}}</td>
+                        <td>{{datas.effectifs_par_zone.limit.percent}}</td>
+                    </tr>
+                    <tr>
+                        <td>Autres</td>
+                        <td>{{datas.effectifs_par_zone.autres.num}}</td>
+                        <td>{{datas.effectifs_par_zone.autres.percent}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+</div>

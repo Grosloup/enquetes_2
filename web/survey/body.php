@@ -27,7 +27,15 @@
         <ul id="sb-menu">
             <li><a href="#/" class="sb-menu-item" ng-click="setDirection()">Accueil</a></li>
             <li><a href="#/last-month" class="sb-menu-item" ng-click="setDirection()">Les Stat' du mois dernier</a></li>
-            <li><a href="#/cumul" class="sb-menu-item" ng-click="setDirection()">Le cumul de l'année</a></li>
+            <li>
+                <ul><h3 class="sb-menu-header">Le cumul de l'année</h3>
+                    <li><a href="#/cumul" class="sb-menu-item" ng-click="setDirection()">l'échantillon</a></li>
+                    <li><a href="#/cumul/repartition-geographique" class="sb-menu-item" ng-click="setDirection()">Régions et départements les plus cités</a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </li>
             <li><a href="#/period" class="sb-menu-item" ng-click="setDirection()">Choisissez votre période</a></li>
             <li><a href="#/period" class="sb-menu-item" ng-click="setDirection()">Et plus encore</a></li>
         </ul>
@@ -83,7 +91,8 @@
 
         var sbMenuItems = d.querySelectorAll(".sb-menu-item");
         [].slice.call(sbMenuItems).forEach(function(el){
-           el.addEventListener("click", function(){
+           el.addEventListener("click", function(evt){
+               //evt.preventDefault();
                if(html.classList.contains("open-menu")){
                    html.classList.remove("open-menu");
                } else {
@@ -101,3 +110,4 @@
 <script src="/js/apps/survey/controllers/MainCtrl.js"></script>
 <script src="/js/apps/survey/controllers/LastMonthCtrl.js"></script>
 <script src="/js/apps/survey/controllers/CumulCtrl.js"></script>
+<script src="/js/apps/survey/controllers/GeoRepartCtrl.js"></script>

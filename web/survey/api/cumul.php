@@ -22,7 +22,7 @@ if( isGet() && isAjax() ){
     }
 
     if($errors == null){
-        header("Content-Type: application/json; charset=utf-8");
+
         $filename = "./cache/cumul.php";
         $now = new DateTime(null, new DateTimeZone("Europe/Paris"));
         $ts = $now->getTimestamp();
@@ -41,7 +41,7 @@ if( isGet() && isAjax() ){
             $string = '<?php return ' . var_export($response["datas"], true) . "; ?>" ;
             file_put_contents($filename, $string);
         }
-
+        header("Content-Type: application/json; charset=utf-8");
 
         echo json_encode($response);
 

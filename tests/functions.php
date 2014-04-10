@@ -53,7 +53,7 @@ function newVisitor(){
 
     $pondereDepts = [1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,];
     shuffle($pondereDepts);
-    $n = rand(0,26);
+    $n = $pondereDepts[rand(0,26)];
     $depsCentre = ["18","28","36","37","41","45"];
     $depsParis = ["75","77","78","91","92","93","94","95"];
     $depsLimit = ["03","23","49","58","72","86","87","89"];

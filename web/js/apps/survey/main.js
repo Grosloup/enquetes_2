@@ -10,6 +10,7 @@ mainApp.config(["$routeProvider","$httpProvider", function($routeProvider, $http
         .when("/", { templateUrl: "/templates/survey/index.html"} )
         .when("/last-month", { templateUrl: "/templates/survey/last-month.html"})
         .when("/cumul", { templateUrl: "/templates/survey/cumul.html"})
+        .when("/cumul/repartition-geographique",{templateUrl: "/templates/survey/repartition-geographique.html"})
         .when("/period", { templateUrl: "/templates/survey/period.html"})
         .otherwise({redirectTo: "/"});
 }]);
