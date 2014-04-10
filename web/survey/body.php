@@ -32,7 +32,7 @@
                     <li><a href="#/cumul" class="sb-menu-item" ng-click="setDirection()">l'échantillon</a></li>
                     <li><a href="#/cumul/repartition-geographique" class="sb-menu-item" ng-click="setDirection()">Régions et départements les plus cités</a></li>
                     <li><a href="#/cumul/details-region" class="sb-menu-item" ng-click="setDirection()">Détails des régions</a></li>
-                    <li><a href="#/cumul/deps-region-evolution" class="sb-menu-item" ng-click="setDirection()">Détails des régions</a></li>
+                    <li><a href="#/cumul/deps-region-evolution" class="sb-menu-item" ng-click="setDirection()">Régions et départements d'habitation - évolution</a></li>
                     <li></li>
                 </ul>
             </li>
@@ -92,7 +92,6 @@
         var sbMenuItems = d.querySelectorAll(".sb-menu-item");
         [].slice.call(sbMenuItems).forEach(function(el){
            el.addEventListener("click", function(evt){
-               //evt.preventDefault();
                if(html.classList.contains("open-menu")){
                    html.classList.remove("open-menu");
                } else {
@@ -112,3 +111,4 @@
 <script src="/js/apps/survey/controllers/CumulCtrl.js"></script>
 <script src="/js/apps/survey/controllers/GeoRepartCtrl.js"></script>
 <script src="/js/apps/survey/controllers/DetailsRegionCtrl.js"></script>
+<script src="/js/apps/survey/controllers/DepsRegionEvolutionCtrl.js"></script>
