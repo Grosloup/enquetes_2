@@ -25,17 +25,17 @@ mainApp.controller("DetailsRegionCtrl", ["$scope", "$sce", "$http", "appCache", 
     $scope.colors = ["#f54d4d","#df4df5","#4d94f5","#f0ee3a","#ed953e","#67da6a","#31d8b3","#fb9df8"];
 
     // TODO[Nicolas] refactor
-    if(appCache["details_region"] && ts < (appCache["details_region"] + 57600)){
+    if(appCache["details_region"] && ts < (appCache["details_region"]["ts"] + 57600)){
         $scope.isloaded = true;
-        $scope.datas = appCache["details_region"];
-        appCache["details_region"].centre.deps.forEach(function(el,idx){
+        $scope.datas = appCache["details_region"].value;
+        appCache["details_region"].value.centre.deps.forEach(function(el,idx){
             $scope.centre.push({value: parseInt(el.effectif), color:$scope.colors[idx]});
         });
-        appCache["details_region"].paris.deps.forEach(function(el,idx){
+        appCache["details_region"].value.paris.deps.forEach(function(el,idx){
             $scope.paris.push({value: parseInt(el.effectif), color:$scope.colors[idx]});
         });
 
-        appCache["details_region"].limit.deps.forEach(function(el,idx){
+        appCache["details_region"].value.limit.deps.forEach(function(el,idx){
             $scope.limit.push({value: parseInt(el.effectif), color:$scope.colors[idx]});
         });
 
