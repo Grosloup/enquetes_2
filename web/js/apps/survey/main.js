@@ -11,6 +11,8 @@ mainApp.config(["$routeProvider","$httpProvider", function($routeProvider, $http
         .when("/last-month", { templateUrl: "/templates/survey/last-month.html"})
         .when("/cumul", { templateUrl: "/templates/survey/cumul.html"})
         .when("/cumul/repartition-geographique",{templateUrl: "/templates/survey/repartition-geographique.html"})
+        .when("/cumul/details-region",{templateUrl: "/templates/survey/details-region.html"})
+        .when("/cumul/deps-region-evolution",{templateUrl: "/templates/survey/deps-region-evolution.html"})
         .when("/period", { templateUrl: "/templates/survey/period.html"})
         .otherwise({redirectTo: "/"});
 }]);

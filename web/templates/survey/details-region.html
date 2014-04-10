@@ -1,0 +1,149 @@
+<div ng-controller="DetailsRegionCtrl">
+    <div class="row">
+        <div class="col col1"></div>
+        <div class="col col4 loader-parent">
+            <h3 class="page-header">Détails des régions - Cumul {{fullYear}}</h3>
+            <span class="loader" ng-hide="isloaded">loading...</span>
+        </div>
+        <div class="col col1"></div>
+    </div>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <p class="messanger-simple text-center"><span ng-bind-html="trustHtmlMessage(infos)"></span></p>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">La région Centre</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col2">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Départements</th>
+                        <th>Effectifs</th>
+                        <th>%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dep in datas.centre.deps">
+                        <td>{{dep.num}} - {{dep.name}}</td>
+                        <td>{{dep.effectif}}</td>
+                        <td style="background-color: {{colors[$index]}};color: #fff;">{{dep.percent}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{datas.centre.effectifTotal}}</td>
+                        <td>100%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col3">
+                <canvas piechart options="chartOptions" data="centre" width="0" height="0" resize="true"></canvas>
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">La région parisienne</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col2">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Départements</th>
+                        <th>Effectifs</th>
+                        <th>%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dep in datas.paris.deps" >
+                        <td>{{dep.num}} - {{dep.name}}</td>
+                        <td>{{dep.effectif}}</td>
+                        <td style="background-color: {{colors[$index]}};color: #fff;">{{dep.percent}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{datas.paris.effectifTotal}}</td>
+                        <td>100%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col3">
+                <canvas piechart options="chartOptions" data="paris" width="0" height="0" resize="true"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">Les départements limitrophes</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col2">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Départements</th>
+                        <th>Effectifs</th>
+                        <th>%</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dep in datas.limit.deps">
+                        <td>{{dep.num}} - {{dep.name}}</td>
+                        <td>{{dep.effectif}}</td>
+                        <td style="background-color: {{colors[$index]}};color: #fff;">{{dep.percent}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>{{datas.limit.effectifTotal}}</td>
+                        <td>100%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col3">
+                <canvas piechart options="chartOptions" data="limit" width="0" height="0" resize="true"></canvas>
+            </div>
+        </div>
+    </section>
+
+
+</div>

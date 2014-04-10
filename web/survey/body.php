@@ -31,8 +31,8 @@
                 <ul><h3 class="sb-menu-header">Le cumul de l'année</h3>
                     <li><a href="#/cumul" class="sb-menu-item" ng-click="setDirection()">l'échantillon</a></li>
                     <li><a href="#/cumul/repartition-geographique" class="sb-menu-item" ng-click="setDirection()">Régions et départements les plus cités</a></li>
-                    <li></li>
-                    <li></li>
+                    <li><a href="#/cumul/details-region" class="sb-menu-item" ng-click="setDirection()">Détails des régions</a></li>
+                    <li><a href="#/cumul/deps-region-evolution" class="sb-menu-item" ng-click="setDirection()">Détails des régions</a></li>
                     <li></li>
                 </ul>
             </li>
@@ -111,3 +111,4 @@
 <script src="/js/apps/survey/controllers/LastMonthCtrl.js"></script>
 <script src="/js/apps/survey/controllers/CumulCtrl.js"></script>
 <script src="/js/apps/survey/controllers/GeoRepartCtrl.js"></script>
+<script src="/js/apps/survey/controllers/DetailsRegionCtrl.js"></script>

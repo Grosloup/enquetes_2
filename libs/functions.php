@@ -62,3 +62,31 @@ function getNumSurveyByMonthAndYear($month = 1, $year = 14){
     $stmt->execute();
     return $stmt->fetch()["totalMonthSurvey"];
 }
+
+function effectifsParDeptEtAnnee($dept="", $annee=""){
+    global $pdo;
+    $sql = "SELECT COUNT() as effectif FROM visite WHERE departement_num=:dept AND annee=:annee";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":dept",$dept);
+    $stmt->bindValue(":annee",$annee);
+    $stmt->execute();
+    return $stmt->fetch()["effectif"];
+
+
+}
+
+function effectifsParDeptEtMoisEtAnnee($dept="01", $mois=1, $annee=14){
+    global $pdo;
+    $sql = "SELECT COUNT() as effectif FROM visite WHERE departement_num=:dept AND mois=:mois AND annee=:annee";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":dept",$dept);
+    $stmt->bindValue(":mois",$mois);
+    $stmt->bindValue(":annee",$annee);
+    $stmt->execute();
+    return $stmt->fetch()["effectif"];
+
+
+}
+

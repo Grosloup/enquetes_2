@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Nicolas
- * Date: 09/04/2014
- * Time: 23:53
+ * User: Nicolas Canfrère
+ * Date: 10/04/2014
+ * Time: 10:14
  */
 include_once "connection.php";
 $departements = [
@@ -32,16 +32,15 @@ $departements = [
 ];
 include_once "../../../libs/functions.php";
 
-if( isGet() && isAjax()){
-
+if(isGet() && isAjax()){
 
     $errors = [];
     $response = ["datas"=>null, "errors"=>null];
-    $totalEnquetes = getNumTotalSurvey();
-    $twoPercentLimit = $totalEnquetes * 0.02;
+
     $depsCentre = ["18","28","36","37","41","45"];
     $depsParis = ["75","77","78","91","92","93","94","95"];
     $depsLimit = ["03","23","49","58","72","86","87","89"];
+
     if(isset($_GET["year"]) && $_GET["year"] != null){
         if(!is_numeric($_GET["year"]) || $_GET["year"] < 2009){
             $errors[] = "Year n'est pas une année de référence.";
@@ -49,72 +48,71 @@ if( isGet() && isAjax()){
     } else {
         $errors[] = "Vous devez donner une année de référence.";
     }
-
-    // TODO mise en cache
+    $twoDigitsYear = $_GET["year"] - 2000;
     if($errors == null){
-        $sql = "SELECT COUNT() as num, departement_num as dept FROM visiteur GROUP BY departement_num ORDER BY num DESC";
 
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $results = $stmt->fetchAll();
-        $topDepts= [];
-        $counter = 0;
-        $others = ["num"=>0,"percent"=>0];
-        $depsCentreEffectifs = 0;
-        $depsParisEffectifs = 0;
-        $depsLimitEffectifs = 0;
-        $depsOthersEffectifs = 0;
-        foreach($results as $result){
-            $result["dept_name"] = $departements[$result["dept"]];
-            $result["percent"] = round(($result["num"]/$totalEnquetes)*100,2);
-            if($result["num"] > $twoPercentLimit){
-                $topDepts[] = $result;
-            } else {
-                $others["num"] += (int) $result["num"];
-            }
-
-            if(in_array($result["dept"], $depsCentre)){
-                $depsCentreEffectifs += (int) $result["num"];
-            } elseif (in_array($result["dept"], $depsParis)){
-                $depsParisEffectifs += (int) $result["num"];
-            } elseif (in_array($result["dept"], $depsLimit)) {
-                $depsLimitEffectifs += (int) $result["num"];
-            } else {
-                $depsOthersEffectifs += (int) $result["num"];
-            }
+        // region centre
+        $resultsDeptCentre = ["name"=>"Région Centre","effectifTotal"=>0, "deps"=>[]];
+        $totalEffectifCentre = 0;
+        foreach($depsCentre as $dep){
+            $effectif = effectifsParDeptEtAnnee($dep, $twoDigitsYear);
+            $totalEffectifCentre += (int) $effectif;
+            $resultsDeptCentre["deps"][] = [
+                "effectif"=>$effectif,
+                "name"=>$departements[$dep],
+                "num"=>$dep,
+            ];
         }
-        $others["percent"] = round(($others["num"]/$totalEnquetes)*100,2);
 
-        $effectifsPerZone = [
-            "centre"=>[
-                "name"=>"Région Centre",
-                "num"=>$depsCentreEffectifs,
-                "percent"=>round(($depsCentreEffectifs/$totalEnquetes)*100,2),
-            ],
-            "paris"=>[
-                "name"=>"Région Parisienne",
-                "num"=>$depsParisEffectifs,
-                "percent"=>round(($depsParisEffectifs/$totalEnquetes)*100,2),
-            ],
-            "limit"=>[
-                "name"=>"Départements limitrophes",
-                "num"=>$depsLimitEffectifs,
-                "percent"=>round(($depsLimitEffectifs/$totalEnquetes)*100,2),
-            ],
-            "autres"=>[
-                "name"=>"Autres",
-                "num"=>$depsOthersEffectifs,
-                "percent"=>round(($depsOthersEffectifs/$totalEnquetes)*100,2),
-            ],
-        ];
+        $resultsDeptCentre["effectifTotal"]  = $totalEffectifCentre;
+        foreach($resultsDeptCentre["deps"] as $k=>$v){
+            $resultsDeptCentre["deps"][$k]["percent"] = round(($v["effectif"]/$totalEffectifCentre)*100, 2);
+        }
 
 
-        $response["datas"] = ["nombre_enquetes"=>$totalEnquetes, "annee"=> $_GET["year"], "top_depts" => $topDepts, "others"=>$others, "effectifs_par_zone"=>$effectifsPerZone];
+        // region parisienne
+        $resultsDeptParis = ["name"=>"Région parisienne","effectifTotal"=>0, "deps"=>[]];
+        $totalEffectifParis = 0;
+        foreach($depsParis as $dep){
+            $effectif = effectifsParDeptEtAnnee($dep, $twoDigitsYear);
+            $totalEffectifParis += (int) $effectif;
+            $resultsDeptParis["deps"][] = [
+                "effectif"=>$effectif,
+                "name"=>$departements[$dep],
+                "num"=>$dep,
+            ];
+        }
+
+        $resultsDeptParis["effectifTotal"]  = $totalEffectifParis;
+        foreach($resultsDeptParis["deps"] as $k=>$v){
+            $resultsDeptParis["deps"][$k]["percent"] = round(($v["effectif"]/$totalEffectifParis)*100, 2);
+        }
+
+        // limitrophes
+        $resultsDeptLimit = ["name"=>"Départements limitrophes","effectifTotal"=>0, "deps"=>[]];
+        $totalEffectifLimit = 0;
+        foreach($depsLimit as $dep){
+            $effectif = effectifsParDeptEtAnnee($dep, $twoDigitsYear);
+            $totalEffectifLimit += (int) $effectif;
+            $resultsDeptLimit["deps"][] = [
+                "effectif"=>$effectif,
+                "name"=>$departements[$dep],
+                "num"=>$dep,
+            ];
+        }
+
+        $resultsDeptLimit["effectifTotal"]  = $totalEffectifLimit;
+        foreach($resultsDeptLimit["deps"] as $k=>$v){
+            $resultsDeptLimit["deps"][$k]["percent"] = round(($v["effectif"]/$totalEffectifLimit)*100, 2);
+        }
+
+
         header("Content-Type: application/json; charset=utf-8");
-
+        $response["datas"] = ["centre"=>$resultsDeptCentre,"paris"=>$resultsDeptParis,"limit"=>$resultsDeptLimit];
         echo json_encode($response);
-
         die();
+
+
 
     } else {
         header("Content-Type: application/json; charset=utf-8");
@@ -123,12 +121,16 @@ if( isGet() && isAjax()){
         die();
     }
 
-
-
-
-
 } else {
     header("Content-Type: text/html; charset=utf-8");
     echo json_encode("nothing to do here");
     die();
 }
+
+
+
+
+
+
+
+

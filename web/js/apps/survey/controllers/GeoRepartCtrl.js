@@ -34,9 +34,8 @@ mainApp.controller("GeoRepartCtrl", ["$scope", "$sce", "$http", function($scope,
                 console.log(data.datas);
 
 
-                var i= 0, colors=["#e08427","#2e85a3","#31974f","#e45449"];
+                var i= 0, colors=["#2e85a3","#33aecd","#30c3e1","#3bd1f5"];
                 for(var zone in data.datas.effectifs_par_zone){
-                    console.log(zone);
                     if(data.datas.effectifs_par_zone.hasOwnProperty(zone)){
                         $scope.chart.data.push({
                             value:data.datas.effectifs_par_zone[zone].num,

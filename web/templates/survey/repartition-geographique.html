@@ -78,12 +78,12 @@
         <div class="row">
             <div class="col col1"></div>
             <div class="col col3">
-                <canvas piechart options="chartOptions" data="chart.data" width="0" height="0" resize="true"></canvas></canvas>
+                <canvas piechart options="chartOptions" data="chart.data" width="0" height="0" resize="true"></canvas>
             </div>
             <div class="col col1">
                 <table class="table-regular">
                     <tr ng-repeat="legend in chart.legend">
-                        <td style="background-color: {{legend.color}};color:#fff;font-size:80%;">{{legend.name}} {{legend.percent}}%</td>
+                        <td style="background-color: {{legend.color}};color:#fff;font-size:80%;font-weight:700;">{{legend.name}} {{legend.percent}}%</td>
                     </tr>
                 </table>
             </div>
