@@ -39,6 +39,7 @@ mainApp.controller("CumulCtrl", ["$scope", "$sce", "$http", "CacheFct", function
     if(null !== ($scope.datas = CacheFct.get("cumul_annee"))){
         $scope.isloaded = true;
         $scope.effectifs = $scope.datas["effectifs_annee"];
+        doCharts();
     } else {
         $http.get("/survey/api/cumul.php", {params:{year: $scope.fullYear}})
             .success(function(data,status,headers,config){
