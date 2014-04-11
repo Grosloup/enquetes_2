@@ -3,11 +3,7 @@
  */
 var mainApp = angular.module("MainApp");
 
-var Monthes = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 
-function capitalizr(word){
-    return word.charAt(0).toUpperCase() + word.slice(1);
-}
 
 mainApp.controller("CumulCtrl", ["$scope", "$sce", "$http", "appCache", function($scope, $sce, $http, appCache){
 

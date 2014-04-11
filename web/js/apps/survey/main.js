@@ -1,5 +1,9 @@
 var mainApp = angular.module("MainApp", ["ngRoute", "ngSanitize", "ngAnimate", "angles"]);
+var Monthes = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 
+function capitalizr(word){
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
 
 mainApp.config(["$routeProvider","$httpProvider", function($routeProvider, $httpProvider){

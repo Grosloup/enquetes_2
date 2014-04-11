@@ -32,9 +32,153 @@
         <div class="row">
             <div class="col col1"></div>
             <div class="col col4">
-                <h5 class="page-header">Les régions détaillées</h5>
+                <h4 class="page-header">Les régions détaillées</h4>
             </div>
             <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">La région Centre</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Région Centre {{fullYear}}</th>
+                        <th ng-repeat="m in monthes">{{m}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="d in datas.centre.depts">
+                            <td>{{d.num}} - {{d.name}}</td>
+                            <td ng-repeat="i in monthes">{{d.percentParMois[$index]}}%</td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td ng-repeat="i in monthes">{{datas.centre.totalEffectifParMois[$index]}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">La région parisienne</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Région parisienne {{fullYear}}</th>
+                        <th ng-repeat="m in monthes">{{m}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="d in datas.paris.depts">
+                        <td>{{d.num}} - {{d.name}}</td>
+                        <td ng-repeat="i in monthes">{{d.percentParMois[$index]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td ng-repeat="i in monthes">{{datas.paris.totalEffectifParMois[$index]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">Les départements limitrophes</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Départements limitrophes {{fullYear}}</th>
+                        <th ng-repeat="m in monthes">{{m}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="d in datas.limit.depts">
+                        <td>{{d.num}} - {{d.name}}</td>
+                        <td ng-repeat="i in monthes">{{d.percentParMois[$index]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td ng-repeat="i in monthes">{{datas.limit.totalEffectifParMois[$index]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <h5 class="page-header">Les autres départements</h5>
+            </div>
+            <div class="col col1"></div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Départements limitrophes {{fullYear}}</th>
+                        <th ng-repeat="m in monthes">{{m}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="d in datas.autres.depts">
+                        <td>{{d.num}} - {{d.name}}</td>
+                        <td ng-repeat="i in monthes">{{d.percentParMois[$index]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td ng-repeat="i in monthes">{{datas.autres.totalEffectifParMois[$index]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
