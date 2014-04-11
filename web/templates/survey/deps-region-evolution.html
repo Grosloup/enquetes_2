@@ -32,6 +32,62 @@
         <div class="row">
             <div class="col col1"></div>
             <div class="col col4">
+                <canvas linechart options="chartCompareOptions" data="chartCompare" height="0" width="0"  resize="true"></canvas>
+            </div>
+            <div class="col col1"></div>
+        </div>
+
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th ng-repeat="m in monthes">{{m}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Région Centre</td>
+                        <td ng-repeat="m in monthes">{{datas.compare.percentParMoisEtZone.centre[$index]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Région parisienne
+                        </td>
+                        <td ng-repeat="m in monthes">{{datas.compare.percentParMoisEtZone.paris[$index]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Départements limitrophes
+                        </td>
+                        <td ng-repeat="m in monthes">{{datas.compare.percentParMoisEtZone.limit[$index]}}%</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Autres
+                        </td>
+                        <td ng-repeat="m in monthes">{{datas.compare.percentParMoisEtZone.autres[$index]}}%</td>
+                    </tr>
+
+                    <tr>
+                        <td>Total</td>
+                        <td ng-repeat="m in monthes">{{datas.compare.totalParMois[$index]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
                 <h4 class="page-header">Les régions détaillées</h4>
             </div>
             <div class="col col1"></div>
@@ -50,6 +106,17 @@
 
     <section>
         <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <canvas barchart options="chartOptions" data="chartCentre" height="0" width="0"  resize="true"></canvas>
+            </div>
+            <div class="col col1"></div>
+        </div>
+
+    </section>
+
+    <section>
+        <div class="row">
             <div class="col col6">
                 <table class="table">
                     <thead>
@@ -61,7 +128,7 @@
                     <tbody>
 
                         <tr ng-repeat="d in datas.centre.depts">
-                            <td>{{d.num}} - {{d.name}}</td>
+                            <td style="background-color: {{colors[$index]}}; color: #fff;">{{d.num}} - {{d.name}}</td>
                             <td ng-repeat="i in monthes">{{d.percentParMois[$index]}}%</td>
                         </tr>
                         <tr>
@@ -86,6 +153,17 @@
 
     <section>
         <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <canvas barchart options="chartOptions" data="chartParis" height="0" width="0"  resize="true"></canvas>
+            </div>
+            <div class="col col1"></div>
+        </div>
+
+    </section>
+
+    <section>
+        <div class="row">
             <div class="col col6">
                 <table class="table">
                     <thead>
@@ -97,7 +175,7 @@
                     <tbody>
 
                     <tr ng-repeat="d in datas.paris.depts">
-                        <td>{{d.num}} - {{d.name}}</td>
+                        <td style="background-color: {{colors[$index]}}; color: #fff;">{{d.num}} - {{d.name}}</td>
                         <td ng-repeat="i in monthes">{{d.percentParMois[$index]}}%</td>
                     </tr>
                     <tr>
@@ -118,6 +196,17 @@
             </div>
             <div class="col col1"></div>
         </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col col1"></div>
+            <div class="col col4">
+                <canvas barchart options="chartOptions" data="chartLimit" height="0" width="0"  resize="true"></canvas>
+            </div>
+            <div class="col col1"></div>
+        </div>
+
     </section>
 
     <section>

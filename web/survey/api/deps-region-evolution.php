@@ -176,11 +176,31 @@ if( isGet() && isAjax() ){
         }
     }
 
+    // comparaison
+    $depCompare = ["totalParMois"=>[0,0,0,0,0,0,0,0,0,0,0,0],
+        "percentParMoisEtZone"=>[
+            "centre"=>[0,0,0,0,0,0,0,0,0,0,0,0],
+            "paris"=>[0,0,0,0,0,0,0,0,0,0,0,0],
+            "limit"=>[0,0,0,0,0,0,0,0,0,0,0,0],
+            "autres"=>[0,0,0,0,0,0,0,0,0,0,0,0]
+        ]];
+    for($i=0;$i<12;$i++){
+        $depCompare["totalParMois"][$i] = $depCentreResult["totalEffectifParMois"][$i] + $depParisResult["totalEffectifParMois"][$i] + $depLimitResult["totalEffectifParMois"][$i] + $depAutresResult["totalEffectifParMois"][$i];
+    }
+
+    for($i=0;$i<12;$i++){
+        $depCompare["percentParMoisEtZone"]["centre"][$i] = round(($depCentreResult["totalEffectifParMois"][$i] / $depCompare["totalParMois"][$i])*100, 2);
+        $depCompare["percentParMoisEtZone"]["paris"][$i] = round(($depParisResult["totalEffectifParMois"][$i] / $depCompare["totalParMois"][$i])*100, 2);
+        $depCompare["percentParMoisEtZone"]["limit"][$i] = round(($depLimitResult["totalEffectifParMois"][$i] / $depCompare["totalParMois"][$i])*100, 2);
+        $depCompare["percentParMoisEtZone"]["autres"][$i] = round(($depAutresResult["totalEffectifParMois"][$i] / $depCompare["totalParMois"][$i])*100, 2);
+    }
+
     $response["datas"] = [
         "centre"=>$depCentreResult,
         "paris"=>$depParisResult,
         "limit"=>$depLimitResult,
         "autres"=>$depAutresResult,
+        "compare"=>$depCompare,
     ];
 
     header("Content-Type: application/json; charset=utf-8");
