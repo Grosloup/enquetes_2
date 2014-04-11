@@ -12,7 +12,7 @@
     <div class="nav">
         <ul>
             <li><button id="sidebar-toggler"></button></li>
-            <li><button id="back-btn" ng-click="back()" ng-show="slider.back"></button></li>
+            <!--<li><button id="back-btn" ng-click="back()" ng-show="slider.back"></button></li>-->
         </ul>
     </div>
     <div class="nav nav-right">

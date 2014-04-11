@@ -23,3 +23,23 @@ mainApp.config(["$routeProvider","$httpProvider", function($routeProvider, $http
 
 
 mainApp.value("appCache", {});
+
+mainApp.factory("CacheFct", function(){
+
+    return {
+        datas: {},
+        get: function(key){
+            if(this.datas.hasOwnProperty(key) && this.datas[key].ts + 57600000 > Date.now()){
+                return this.datas[key].value;
+            }
+            return null;
+        },
+        set: function(key, value){
+            this.datas[key] = {
+                ts: Date.now(),
+                value: value
+            }
+        }
+    };
+
+});
