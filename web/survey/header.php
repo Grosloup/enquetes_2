@@ -23,15 +23,6 @@
     <link rel="stylesheet" href="/css/animate.min.css"/>
     <script src="/js/vendor/modernizr.js"></script>
 
-    <?php if(isset($_SESSION["isConnected"]) && $_SESSION["isConnected"]): ?>
-        <script src="/js/vendor/jquery-2.1.0.min.js"></script>
-        <script src="/js/vendor/Chart.min.js"></script>
-        <script src="/js/vendor/angular.js"></script>
-        <script src="/js/vendor/angular-route.js"></script>
-        <script src="/js/vendor/angular-sanitize.js"></script>
-        <script src="/js/vendor/angular-animate.js"></script>
-        <script src="/js/vendor/angles.js"></script>
 
-    <?php endif; ?>
 </head>
 <body <?php if(isset($_SESSION["isConnected"]) && $_SESSION["isConnected"]){ echo 'ng-controller="MainCtrl"';} ?>>

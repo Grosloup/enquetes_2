@@ -10,28 +10,20 @@ mainApp.controller("CumulCtrl", ["$scope", "$sce", "$http", "CacheFct", function
     var today = new Date();
     $scope.fullYear = today.getFullYear();
     $scope.isloaded = false;
-    $scope.numEnquetes = 0;
-    $scope.effectifs = [];
+    var numEnquetes = 0;
+    $scope.effectifs = {effectifMois:[], percent:[]};
     $scope.monthes = [];
     $scope.datas = {};
     Monthes.forEach(function(m){
         $scope.monthes.push(capitalizr(m));
     });
-    $scope.chartOptions = {
+    $scope.chartCumulOptions = {
         animation: false
     };
     var datasToChart = [];
-    $scope.chart = {
+    $scope.chartCumul = {
         labels : $scope.monthes,
-        datasets: [
-            {
-                fillColor : "rgba(46,133,163,.5)",
-                strokeColor : "#2e85a3",
-                pointColor : "rgba(46,133,163,.5)",
-                pointStrokeColor : "#2e85a3",
-                data : []
-            }
-        ]
+        datasets: []
     };
     $scope.trustHtmlMessage = function(message){
         return $sce.trustAsHtml(message);
@@ -45,13 +37,15 @@ mainApp.controller("CumulCtrl", ["$scope", "$sce", "$http", "CacheFct", function
             .success(function(data,status,headers,config){
                 $scope.isloaded = true;
                 if( !data.errors ){
-                    $scope.numEnquetes = (data.datas["nombre_enquetes"] != null) ? parseInt(data.datas["nombre_enquetes"]) : 0;
-                    if($scope.numEnquetes == 0){
+                    numEnquetes = (data.datas["nombre_enquetes"] != null) ? parseInt(data.datas["nombre_enquetes"]) : 0;
+                    if(numEnquetes == 0){
                         $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Il n'y a pas (encore) de données enregistrées pour l'année " + $scope.fullYear + ".";
                     } else {
                         CacheFct.set("cumul_annee", data.datas);
-                        $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre total d'enquêtes depuis le début de l'année est de " + $scope.numEnquetes + ".";
-                        $scope.effectifs = data.datas["effectifs_annee"];
+                        $scope.datas = data.datas;
+                        $scope.infos = "<i class='fa fa-info-circle text-blue'></i> Le nombre total d'enquêtes depuis le début de l'année est de " + $scope.datas["nombre_enquetes"] + ".";
+                        $scope.effectifs = $scope.datas["effectifs_annee"];
+                        console.log($scope.effectifs);
                         doCharts();
                     }
                 } else {
@@ -65,9 +59,13 @@ mainApp.controller("CumulCtrl", ["$scope", "$sce", "$http", "CacheFct", function
     }
 
     function doCharts(){
-        $scope.effectifs.forEach(function(eff){
+        /*$scope.effectifs.forEach(function(eff){
             datasToChart.push(parseInt(eff["effectifs_mois"]));
-        });
-        $scope.chart.datasets[0].data = datasToChart;
+        });*/
+        $scope.chartCumul.datasets = [{
+            fillColor : "rgba(46,133,163,0.5)",
+            strokeColor : "#2e85a3",
+            data : $scope.datas["effectifs_annee"]["effectifMois"]
+        }];
     }
 }]);

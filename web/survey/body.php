@@ -105,6 +105,16 @@
 
     })(window,document);
 </script>
+<?php if(isset($_SESSION["isConnected"]) && $_SESSION["isConnected"]): ?>
+    <script src="/js/vendor/jquery-2.1.0.min.js"></script>
+    <script src="/js/vendor/Chart.min.js"></script>
+    <script src="/js/vendor/angular.js"></script>
+    <script src="/js/vendor/angular-route.js"></script>
+    <script src="/js/vendor/angular-sanitize.js"></script>
+    <script src="/js/vendor/angular-animate.js"></script>
+    <script src="/js/vendor/angles.js"></script>
+
+<?php endif; ?>
 <script src="/js/apps/survey/main.js"></script>
 <script src="/js/apps/survey/controllers/MainCtrl.js"></script>
 <script src="/js/apps/survey/controllers/LastMonthCtrl.js"></script>

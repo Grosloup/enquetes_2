@@ -31,11 +31,10 @@ if( isGet() && isAjax() ){
         } else {
             $twoDigitsYear = $_GET["year"] - 2000;
             $totalYear = getNumTotalSurvey($twoDigitsYear);
-            $effectifsAnnee = [];
+            $effectifsAnnee = ["effectifMois" =>[], "percent"=>[]];
             for($i=0; $i<12; $i++){
-                $effectifMois = getNumSurveyByMonthAndYear($i+1, $twoDigitsYear);
-                $percent = round(($effectifMois / $totalYear)*100, 2);
-                $effectifsAnnee[] = ["effectifs_mois"=>$effectifMois, "percent_mois"=>$percent];
+                $effectifsAnnee["effectifMois"][] = (int) getNumSurveyByMonthAndYear($i+1, $twoDigitsYear);
+                $effectifsAnnee["percent"][] = round(($effectifsAnnee["effectifMois"][$i] / $totalYear)*100, 2);
             }
             $response["datas"] = ["nombre_enquetes"=>$totalYear, "annee"=> $_GET["year"], "effectifs_annee"=>$effectifsAnnee];
             $string = '<?php return ' . var_export($response["datas"], true) . "; ?>" ;
